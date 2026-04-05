@@ -1,4 +1,4 @@
-﻿/* ===== DATA ===== */
+/* ===== DATA ===== */
 const CAT = {
   but_viet: {
     n: 'Bút Viết', i: '🖊️',
@@ -416,3 +416,181 @@ const CAT = {
     }
   }
 };
+
+/* ===== DYNAMIC AGGREGATION FOR ALL CATE ===== */
+(function buildAllCate() {
+  const cats = ['but_viet', 'hoc_cu', 'my_thuat', 'van_phong_pham'];
+  let totalCur = 0, totalPre = 0;
+  let unitsCur = 0, unitsPre = 0;
+  let shareCurSum = 0, sharePreSum = 0;
+  let storeCur = 0, storePre = 0;
+  
+  let platMap = {};
+  let brandMapCur = {};
+  let priceMap = {};
+  let allProds = [];
+
+  cats.forEach(k => {
+    if(!CAT[k]) return;
+    const d = CAT[k];
+    
+    const getVal = (str) => {
+      let m = String(str).match(/[\d.]+/);
+      return m ? parseFloat(m[0]) : 0;
+    };
+    
+    // KPI 0: Gross Sales
+    let curG = getVal(d.kpi[0].v);
+    let preGMatch = String(d.kpi[0].sub).match(/[\d.]+/);
+    let preG = preGMatch ? parseFloat(preGMatch[0]) : 0;
+    
+    totalCur += curG; totalPre += preG;
+    
+    // KPI 1: Units
+    let curU = getVal(d.kpi[1].v);
+    let preUMatch = String(d.kpi[1].sub).match(/[\d.]+/);
+    let preU = preUMatch ? parseFloat(preUMatch[0]) : 0;
+    unitsCur += curU; unitsPre += preU;
+    
+    // KPI 2: TikTok Market Share
+    let curS = getVal(d.kpi[2].v);
+    let preSMatch = String(d.kpi[2].sub).match(/[\d.]+/);
+    let preS = preSMatch ? parseFloat(preSMatch[0]) : 0;
+    shareCurSum += curG * curS;
+    if (preS) sharePreSum += preG * preS;
+    
+    // KPI 3: Storefronts
+    let getStore = (str) => {
+      let s = String(str);
+      let v = getVal(s.replace(/,/g, ''));
+      return s.toLowerCase().includes('nghìn') || v < 100 ? v * 1000 : v;
+    };
+    storeCur += getStore(d.kpi[3].v);
+    storePre += getStore(d.kpi[3].sub);
+    
+    // Platforms
+    if (d.plat) {
+      d.plat.forEach(p => {
+         if(!platMap[p.n]) platMap[p.n] = {n: p.n, cur:0, pre:0, c: p.c};
+         platMap[p.n].cur += p.cur;
+         platMap[p.n].pre += p.pre;
+      });
+    }
+    
+    // Brands
+    if (d.brand) {
+      d.brand.forEach(b => {
+         let n = b.n === 'TL' ? 'Thiên Long' : b.n;
+         if(!brandMapCur[n]) { brandMapCur[n] = {n: n, curAbs: 0, preAbs: 0, c: b.c}; }
+         brandMapCur[n].curAbs += (b.cur / 100) * curG;
+         brandMapCur[n].preAbs += (b.pre / 100) * preG;
+      });
+    }
+    
+    // Prices
+    if (d.price) {
+      d.price.forEach(p => {
+        let r = p.r.replace('.0M', 'M');
+        if(!priceMap[r]) priceMap[r] = {r: r, s:0, l:0, t:0};
+        priceMap[r].s += p.s||0;
+        priceMap[r].l += p.l||0;
+        priceMap[r].t += p.t||0;
+      });
+    }
+    
+    // Prod
+    if (d.prod) {
+      d.prod.forEach(p => { allProds.push({...p, cat: d.n}); });
+    }
+  });
+
+  const pFmt = (v) => v > 0 ? '+'+Math.abs(v) : v == 0 ? '0' : '-'+Math.abs(v);
+  const groG = ((totalCur - totalPre)/totalPre * 100).toFixed(0);
+  const groU = ((unitsCur - unitsPre)/unitsPre * 100).toFixed(0);
+  const groSt = ((storeCur - storePre)/storePre * 100).toFixed(0);
+  
+  const tShrCur = (shareCurSum / totalCur).toFixed(1);
+  const tShrPre = (sharePreSum / totalPre).toFixed(1);
+  const groShr = (tShrCur - tShrPre).toFixed(1);
+  
+  const fmtSt = storeCur > 1000 ? (storeCur/1000).toFixed(1) : storeCur.toFixed(0);
+  const fmtStU = storeCur > 1000 ? 'Nghìn' : '';
+  const fmtStPre = storePre > 1000 ? (storePre/1000).toFixed(1) + ' nghìn' : storePre.toFixed(0);
+
+  const kpis = [
+    { l: 'Gross Sales (VND)', v: totalCur.toFixed(1), u: 'Tỷ', g: pFmt(groG)+'%', sub: `vs ${totalPre.toFixed(1)} tỷ in Q1 2025`, ic: 'blue' },
+    { l: 'Units Sold', v: unitsCur.toFixed(1), u: 'Triệu', g: pFmt(groU)+'%', sub: `vs ${unitsPre.toFixed(1)} triệu in Q1 2025`, ic: 'green' },
+    { l: 'TikTok Market Share', v: tShrCur+'%', u: '', g: pFmt(groShr)+'pp', sub: `vs ${tShrPre}% in Q1 2025`, ic: 'teal' },
+    { l: 'Active Storefronts', v: fmtSt, u: fmtStU, g: pFmt(groSt)+'%', sub: `vs ${fmtStPre} in Q1 2025`, ic: 'orange' }
+  ];
+  
+  let platArr = Object.values(platMap).sort((a,b)=>b.cur - a.cur);
+  
+  let brands = Object.values(brandMapCur);
+  brands.forEach(b => {
+     b.cur = (b.curAbs / totalCur) * 100;
+     b.pre = totalPre > 0 ? (b.preAbs / totalPre) * 100 : 0;
+  });
+  brands.sort((a,b)=>b.cur - a.cur);
+  
+  let finalBrands = [];
+  let othersCur = 0, othersPre = 0;
+  brands.forEach(b => {
+     if(finalBrands.length < 5 && b.n.toLowerCase() !== 'others') {
+         finalBrands.push(b);
+     } else {
+         othersCur += b.cur; othersPre += b.pre;
+     }
+  });
+  finalBrands.push({n: 'Others', cur: othersCur, pre: othersPre, c: '#cbd5e1'});
+
+  const priceOrder = [
+    '< 10K','10K-30K','30K-50K','50K-75K','75K-100K','100K-150K','150K-200K',
+    '200K-350K','350K-500K','500K-750K','750K-1M','1M-1.5M','1.5M-2M','2M-3.5M'
+  ];
+  let finalPrices = [];
+  priceOrder.forEach(r => { if(priceMap[r]) finalPrices.push(priceMap[r]); });
+  
+  const getRv = (str) => {
+    if(!str) return 0;
+    let s = str.toString();
+    if(s.includes('Tỷ')) return parseFloat(s) * 1000;
+    if(s.includes('Tr')) return parseFloat(s);
+    return 0;
+  };
+  allProds.sort((a,b) => getRv(b.rv) - getRv(a.rv));
+  let topProds = allProds.slice(0, 30);
+
+  let top10Rv = 0;
+  for(let i=0; i<10 && i<topProds.length; i++) top10Rv += getRv(topProds[i].rv) / 1000; // in ty
+  let top10Contri = (top10Rv / totalCur * 100).toFixed(1);
+  
+  let topBrandShare = finalBrands[0] || {n:'N/A', cur:0};
+  let prodCnt = topProds.slice(0,10).filter(p=>{
+     let n = (p.br||'').toLowerCase();
+     let tn = topBrandShare.n.toLowerCase();
+     return n.includes(tn) || tn.includes(n) || (tn==='thiên long' && (n==='tl' || n==='colokit' || n==='flexoffice'));
+  }).length;
+  
+  const allObj = {
+    n: 'All Cate', i: '🌐',
+    sc: [{ k: 'all', n: 'Tất cả', i: '📊' }],
+    kpi: kpis,
+    dkpi: [
+      kpis[0],
+      { l: 'Top 10 Contribution', v: '~' + top10Contri + '%', u: '', g: '', sub: 'of Total Gross Sales', ic: 'green' },
+      kpis[2],
+      { l: 'Leading Brand', v: `${topBrandShare.n} (${topBrandShare.cur.toFixed(1)}%)`, u: '', g: '', sub: `${prodCnt}/10 Top SKU Spots`, ic: 'orange' }
+    ],
+    plat: platArr,
+    brand: finalBrands,
+    price: finalPrices,
+    prod: topProds
+  };
+
+  // Reorder to put 'all' at the beginning
+  let temp = {};
+  Object.keys(CAT).forEach(k => { temp[k] = CAT[k]; delete CAT[k]; });
+  CAT['all'] = allObj;
+  Object.keys(temp).forEach(k => { CAT[k] = temp[k]; });
+})();

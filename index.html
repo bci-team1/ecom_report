@@ -264,17 +264,39 @@ return`<div class="brand-legend-item"><div class="bl-left"><span class="bl-dot" 
 document.getElementById('charts1').innerHTML=`<div class="card"><div class="card-hdr"><span class="ic">📈</span><h2 class="card-title">Growth Dynamics by Platform</h2></div>${platHTML}</div><div class="card"><div class="card-hdr"><span class="ic">🌐</span><h2 class="card-title">Brand Landscape Q1 2026</h2></div>${donutSVG}<div class="brand-legend">${legendHTML}</div></div>`;
 }
 function renderPrice(){
-const d=getData();
-const totals=d.price.map(p=>p.s+p.l+p.t);
-const mx=Math.max(...totals);
-const fmt=v=>v>=1?(v).toFixed(1)+' tỷ':(v*1000).toFixed(0)+' tr';
-const colors=['#3b82f6','#1a56db','#8b5cf6','#6366f1','#0ea5e9','#818cf8','#60a5fa','#38bdf8'];
-const grand=totals.reduce((a,b)=>a+b,0);
-const barsHTML=d.price.map((p,i)=>{
-const tot=totals[i];
-const h=tot/mx*100;
-return`<div class="price-col"><div class="price-bar-wrap"><div class="price-stack" style="height:${h}%"><span class="pv">${fmt(tot)}</span><div class="seg" style="height:100%;background:${colors[i%8]}"></div></div></div><span class="price-range">${p.r}</span></div>`}).join('');
-document.getElementById('priceSection1').innerHTML=`<div class="card"><div class="card-hdr"><span class="ic">💰</span><h2 class="card-title">Revenue by Price Segment</h2></div><div class="price-grid">${barsHTML}</div></div>`;
+  if(curCat==='all'){
+    const cats=['but_viet','hoc_cu','my_thuat','van_phong_pham'];
+    let mx=0;
+    cats.forEach(k=>{
+      if(!CAT[k])return;
+      const gV=s=>{let m=String(s).match(/[\d.]+/);return m?parseFloat(m[0]):0;};
+      let c=gV(CAT[k].kpi[0].v),p=gV(CAT[k].kpi[0].sub);
+      if(c>mx)mx=c;if(p>mx)mx=p;
+    });
+    const catHTML=cats.map((k,i)=>{
+      if(!CAT[k])return '';
+      const cd=CAT[k];
+      const gV=s=>{let m=String(s).match(/[\d.]+/);return m?parseFloat(m[0]):0;};
+      const cur=gV(cd.kpi[0].v),pre=gV(cd.kpi[0].sub),gro=cd.kpi[0].g;
+      const gc=gro.includes('-')?'down':'up',arrow=gc==='up'?'↗':'↘';
+      const colors=['#3b82f6','#10b981','#f97316','#8b5cf6'];
+      const c=colors[i%colors.length];
+      return `<div class="plat-item"><div class="plat-head"><span class="plat-name" style="font-size:15px;font-weight:600"><span class="pi">${cd.i}</span> ${cd.n}</span><span class="plat-change ${gc}" style="font-size:14px;font-weight:700">${arrow} ${gro}</span></div><div class="plat-bars"><div class="plat-bar-row prev"><span class="yr" style="width:60px">Q1 2025</span><div class="track"><div class="fill" style="width:${pre/mx*100}%;background:${c};opacity:0.6"></div></div><span class="val">${pre.toFixed(1)} tỷ</span></div><div class="plat-bar-row"><span class="yr" style="width:60px">Q1 2026</span><div class="track"><div class="fill" style="width:${cur/mx*100}%;background:${c}"></div></div><span class="val" style="font-weight:700">${cur.toFixed(1)} tỷ</span></div></div></div>`;
+    }).join('');
+    document.getElementById('priceSection1').innerHTML=`<div class="card"><div class="card-hdr" style="margin-bottom:16px;border-bottom:1px solid var(--bd);padding-bottom:12px"><span class="ic">📈</span><h2 class="card-title">Growth Dynamics by Category (Gross Sales)</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:24px;padding:8px 0">${catHTML}</div></div>`;
+    return;
+  }
+  const d=getData();
+  const totals=d.price.map(p=>p.s+p.l+p.t);
+  const mx=Math.max(...totals);
+  const fmt=v=>v>=1?(v).toFixed(1)+' tỷ':(v*1000).toFixed(0)+' tr';
+  const colors=['#3b82f6','#1a56db','#8b5cf6','#6366f1','#0ea5e9','#818cf8','#60a5fa','#38bdf8'];
+  const grand=totals.reduce((a,b)=>a+b,0);
+  const barsHTML=d.price.map((p,i)=>{
+  const tot=totals[i];
+  const h=tot/mx*100;
+  return`<div class="price-col"><div class="price-bar-wrap"><div class="price-stack" style="height:${h}%"><span class="pv">${fmt(tot)}</span><div class="seg" style="height:100%;background:${colors[i%8]}"></div></div></div><span class="price-range">${p.r}</span></div>`}).join('');
+  document.getElementById('priceSection1').innerHTML=`<div class="card"><div class="card-hdr"><span class="ic">💰</span><h2 class="card-title">Revenue by Price Segment</h2></div><div class="price-grid">${barsHTML}</div></div>`;
 }
 function renderProducts(){
 const d=getData();
