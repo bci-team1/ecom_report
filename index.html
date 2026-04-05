@@ -197,7 +197,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 <script src="ecom_data_q1.js"></script>
 <script>
 /* ===== STATE ===== */
-let curCat='but_viet', curSub='all', curSlide=1;
+let curCat='all', curSub='all', curSlide=1;
 function getData(){
 const d=CAT[curCat];
 if(curSub!=='all'&&d.sdata&&d.sdata[curSub]){
@@ -233,10 +233,11 @@ const topB=d.brand[0];
 if(topB){
 let prods=d._sub?d.prod:(curSub==='all'?d.prod:d.prod.filter(p=>p.sc===curSub));
 if(prods.length===0)prods=d.prod;
+let top10Prods = prods.slice(0, 10);
 const norm=s=>s?s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""):'';
 const topBN=norm(topB.n);
-const count=prods.filter(p=>{const pBN=norm(p.br);return pBN.includes(topBN)||topBN.includes(pBN)||(topBN.includes('thien long')&&pBN.includes('tl'))||(topBN.includes('tl')&&pBN.includes('thien long'))}).length;
-return {...k,v:`${topB.n} (${topB.cur}%)`,sub:`${count}/${prods.length} Top SKU Spots`};
+const count=top10Prods.filter(p=>{const pBN=norm(p.br);return pBN.includes(topBN)||topBN.includes(pBN)||(topBN.includes('thien long')&&pBN.includes('tl'))||(topBN.includes('tl')&&pBN.includes('thien long'))}).length;
+return {...k,v:`${topB.n} (${parseFloat(topB.cur).toFixed(2)}%)`,sub:`${count}/10 Top SKU Spots`};
 }
 }
 return k;
@@ -279,7 +280,7 @@ function renderPrice(){
       const gV=s=>{let m=String(s).match(/[\d.]+/);return m?parseFloat(m[0]):0;};
       const cur=gV(cd.kpi[0].v),pre=gV(cd.kpi[0].sub),gro=cd.kpi[0].g;
       const gc=gro.includes('-')?'down':'up',arrow=gc==='up'?'↗':'↘';
-      const colors=['#3b82f6','#10b981','#f97316','#8b5cf6'];
+      const colors=['#3b82f6','#10b981','#eab308','#8b5cf6'];
       const c=colors[i%colors.length];
       return `<div class="plat-item"><div class="plat-head"><span class="plat-name" style="font-size:15px;font-weight:600"><span class="pi">${cd.i}</span> ${cd.n}</span><span class="plat-change ${gc}" style="font-size:14px;font-weight:700">${arrow} ${gro}</span></div><div class="plat-bars"><div class="plat-bar-row prev"><span class="yr" style="width:60px">Q1 2025</span><div class="track"><div class="fill" style="width:${pre/mx*100}%;background:${c};opacity:0.6"></div></div><span class="val">${pre.toFixed(1)} tỷ</span></div><div class="plat-bar-row"><span class="yr" style="width:60px">Q1 2026</span><div class="track"><div class="fill" style="width:${cur/mx*100}%;background:${c}"></div></div><span class="val" style="font-weight:700">${cur.toFixed(1)} tỷ</span></div></div></div>`;
     }).join('');

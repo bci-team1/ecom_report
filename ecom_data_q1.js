@@ -559,7 +559,7 @@ const CAT = {
     return 0;
   };
   allProds.sort((a,b) => getRv(b.rv) - getRv(a.rv));
-  let topProds = allProds.slice(0, 30);
+  let topProds = allProds.slice(0, 10);
 
   let top10Rv = 0;
   for(let i=0; i<10 && i<topProds.length; i++) top10Rv += getRv(topProds[i].rv) / 1000; // in ty
