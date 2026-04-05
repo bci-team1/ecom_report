@@ -1,4 +1,4 @@
-# Q1 2026 E-commerce Performance Dashboard
+# 2026 E-commerce Performance Dashboard
 
 Một báo cáo tương tác hiệu suất cao (High-performance Interactive Dashboard) được thiết kế cho báo cáo điều hành, phân tích dữ liệu thương mại điện tử của Thiên Long Group trong Quý 1 năm 2026.
 
