@@ -2,7 +2,7 @@
 
 Một báo cáo tương tác hiệu suất cao (High-performance Interactive Dashboard) được thiết kế cho báo cáo điều hành, phân tích dữ liệu thương mại điện tử trên các sàn TMĐT Quý 1 năm 2026.
 
-Link: https://github.com/bci-team1/ecom_report/security
+Link: [https://github.com/bci-team1/ecom_report/security](https://bci-team1.github.io/ecom_report/)
 ## 🚀 Tính năng chính
 
 - **Kiến trúc 2 Slide:**
