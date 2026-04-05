@@ -588,9 +588,8 @@ const CAT = {
     prod: topProds
   };
 
-  // Reorder to put 'all' at the beginning
-  let temp = {};
-  Object.keys(CAT).forEach(k => { temp[k] = CAT[k]; delete CAT[k]; });
-  CAT['all'] = allObj;
-  Object.keys(temp).forEach(k => { CAT[k] = temp[k]; });
+  // Reorder: place 'all' first in one clean pass
+  const _ordered = Object.assign({all: allObj}, CAT);
+  Object.keys(CAT).forEach(k => delete CAT[k]);
+  Object.assign(CAT, _ordered);
 })();

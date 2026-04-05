@@ -1,378 +1,1600 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thien Long Group — Sector Performance Analysis Q1 2026</title>
-<meta name="description" content="Strategic Report Q1 2026: E-commerce Sector Performance Analysis for Thien Long Group">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{--pri:#1a56db;--pri-l:#3b82f6;--pri-d:#1e40af;--acc:#0ea5e9;--ok:#10b981;--ok-l:#d1fae5;--err:#ef4444;--warn:#f59e0b;--org:#f97316;--bg:#f0f4ff;--sf:rgba(255,255,255,.82);--sf-solid:#fff;--sf2:#f8fafc;--tx:#0f172a;--tx2:#64748b;--tx3:#94a3b8;--bd:rgba(226,232,240,.7);--sh-s:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.03);--sh:0 4px 16px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);--sh-l:0 20px 50px rgba(0,0,0,.08),0 8px 20px rgba(0,0,0,.04);--r:18px;--r-s:12px;--r-x:8px;--tr:all .35s cubic-bezier(.4,0,.2,1);--glass:saturate(180%) blur(14px)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
-.slide-container{width:100%;min-height:100vh;position:relative}
-.slide{display:none;min-height:100vh;padding:28px 44px;animation:slideEnter .7s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;flex-direction:column}
-.slide.active{display:flex}
-@keyframes slideEnter{from{opacity:0;transform:translateY(24px) scale(.995)}to{opacity:1;transform:translateY(0) scale(1)}}
-/* MESH GRADIENT BACKGROUND */
-.bg-dec{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;will-change:transform}
-.bg-dec.blue{background:linear-gradient(135deg,#3b82f6,#6366f1);width:700px;height:700px;top:-250px;right:-150px;opacity:.12;animation:meshFloat 20s ease-in-out infinite}
-.bg-dec.cyan{background:linear-gradient(135deg,#0ea5e9,#06b6d4);width:500px;height:500px;bottom:-150px;left:-100px;opacity:.1;animation:meshFloat 25s ease-in-out infinite reverse}
-@keyframes meshFloat{0%,100%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(30px,-20px) rotate(5deg)}50%{transform:translate(-20px,30px) rotate(-3deg)}75%{transform:translate(15px,15px) rotate(2deg)}}
-/* HEADER */
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;position:relative;z-index:1}
-.header-left{display:flex;flex-direction:column;gap:4px}
-.badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pri)}
-.badge::before{content:'';display:block;width:28px;height:4px;background:linear-gradient(90deg,var(--pri),#6366f1,var(--acc));border-radius:2px;background-size:200% 100%;animation:shimmer 3s ease-in-out infinite}
-@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.header h1{font-size:28px;font-weight:900;letter-spacing:-.5px;line-height:1.1;background:linear-gradient(135deg,var(--tx),var(--pri-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.header .subtitle{font-size:13px;color:var(--tx2)}
-.nav-tabs{display:flex;gap:4px;background:var(--sf);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:4px;border-radius:14px;box-shadow:var(--sh-s);border:1px solid var(--bd)}
-.nav-tab{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:var(--tr);border:none;background:transparent;color:var(--tx2);display:flex;align-items:center;gap:6px;position:relative;overflow:hidden}
-.nav-tab.active{background:linear-gradient(135deg,var(--pri),#4f46e5);color:#fff;box-shadow:0 4px 16px rgba(26,86,219,.35),inset 0 1px 0 rgba(255,255,255,.15)}
-.nav-tab:hover:not(.active){background:rgba(59,130,246,.06);color:var(--tx)}
-.nav-tab::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.1));opacity:0;transition:var(--tr)}.nav-tab:hover::after{opacity:1}
-/* FILTERS */
-.filter-bar{display:flex;align-items:center;gap:12px;margin-bottom:10px;position:relative;z-index:1;flex-wrap:wrap}
-.filter-label{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--tx2);text-transform:uppercase;display:flex;align-items:center;gap:6px;white-space:nowrap}
-.filter-pills{display:flex;gap:6px;flex-wrap:wrap}
-.filter-pill{padding:7px 16px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;transition:var(--tr);border:1.5px solid var(--bd);background:var(--sf);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);color:var(--tx2);display:flex;align-items:center;gap:5px;white-space:nowrap;position:relative}
-.filter-pill:hover{border-color:var(--pri-l);color:var(--pri);background:rgba(239,246,255,.9);transform:translateY(-2px);box-shadow:0 4px 12px rgba(59,130,246,.12)}
-.filter-pill.active{background:linear-gradient(135deg,var(--pri),#4f46e5);color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(26,86,219,.3),inset 0 1px 0 rgba(255,255,255,.15)}
-.filter-pill .pi{font-size:13px}.filter-pill:not(.active) .pc{background:var(--bg);color:var(--tx3)}
-.filter-pill .pc{font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;background:rgba(255,255,255,.25);min-width:18px;text-align:center}
-/* KPI */
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;position:relative;z-index:1}
-.kpi-card{background:var(--sf);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);border-radius:var(--r);padding:16px 18px;border:1px solid var(--bd);box-shadow:var(--sh-s);transition:var(--tr);position:relative;overflow:hidden}
-.kpi-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:var(--sh-l);border-color:rgba(59,130,246,.3)}
-.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pri),#6366f1,var(--acc));opacity:0;transition:var(--tr);background-size:200% 100%;animation:shimmer 3s ease-in-out infinite}
-.kpi-card:hover::before{opacity:1}
-.kpi-card::after{content:'';position:absolute;top:0;right:0;width:100px;height:100px;background:radial-gradient(circle,rgba(59,130,246,.04),transparent);border-radius:50%;pointer-events:none}
-.kpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:8px;transition:var(--tr)}
-.kpi-card:hover .kpi-icon{transform:scale(1.1)}
-.kpi-icon.blue{background:linear-gradient(135deg,#eff6ff,#dbeafe);color:var(--pri)}.kpi-icon.green{background:linear-gradient(135deg,#f0fdf4,#dcfce7);color:var(--ok)}.kpi-icon.purple{background:linear-gradient(135deg,#faf5ff,#f3e8ff);color:#8b5cf6}.kpi-icon.orange{background:linear-gradient(135deg,#fff7ed,#ffedd5);color:var(--org)}.kpi-icon.teal{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);color:#14b8a6}
-.kpi-top{display:flex;align-items:center;justify-content:space-between}
-.kpi-growth{font-size:11px;font-weight:700;color:var(--ok);background:var(--ok-l);padding:2px 8px;border-radius:20px;display:flex;align-items:center;gap:2px;letter-spacing:.3px}
-.kpi-growth.down{color:var(--err);background:#fee2e2}
-.kpi-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tx2);margin-bottom:3px}
-.kpi-value{font-size:24px;font-weight:800;letter-spacing:-.5px;line-height:1.1;color:var(--tx)}
-.kpi-value .unit{font-size:14px;font-weight:600;color:var(--tx3)}
-.kpi-sub{font-size:10px;color:var(--tx);margin-top:3px;font-weight:500}
-/* CARDS & GRIDS */
-.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:1;margin-bottom:16px}
-.content-grid.full{grid-template-columns:1fr}
-.card{background:var(--sf);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);border-radius:var(--r);padding:20px;border:1px solid var(--bd);box-shadow:var(--sh-s);transition:var(--tr)}
-.card:hover{box-shadow:var(--sh);border-color:rgba(59,130,246,.15)}
-.card-hdr{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.card-hdr .ic{font-size:16px}
-.card-title{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--tx)}
-/* PLATFORM COMPARISON BARS */
-.plat-item{margin-bottom:14px;padding:8px 10px;border-radius:var(--r-s);transition:var(--tr)}.plat-item:last-child{margin-bottom:0}
-.plat-item:hover{background:rgba(59,130,246,.03)}
-.plat-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
-.plat-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
-.plat-name .dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;box-shadow:0 2px 4px rgba(0,0,0,.15)}
-.plat-change{font-size:11px;font-weight:700;color:var(--ok);display:flex;align-items:center;gap:3px;padding:2px 8px;border-radius:6px;background:rgba(16,185,129,.08)}
-.plat-change.down{color:var(--err);background:rgba(239,68,68,.08)}
-.plat-bars{display:flex;flex-direction:column;gap:3px}
-.plat-bar-row{display:flex;align-items:center;gap:8px}
-.plat-bar-row .yr{font-size:11px;font-weight:500;color:var(--tx);width:46px;text-align:right}
-.plat-bar-row .track{flex:1;height:8px;background:linear-gradient(90deg,rgba(241,245,249,.8),var(--bg));border-radius:4px;overflow:hidden}
-.plat-bar-row .fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-.plat-bar-row .val{font-size:12px;font-weight:700;width:60px;font-family:'JetBrains Mono',monospace}
-.plat-bar-row.prev .fill{opacity:.3}
-/* BRAND SHARE */
-.brand-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bd)}
-.brand-item:last-child{border-bottom:none}
-.brand-rank{font-size:10px;font-weight:700;color:var(--tx3);width:16px;text-align:center}
-.brand-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.brand-name{font-size:12px;font-weight:600;flex:1;min-width:0}
-.brand-bar-wrap{width:120px;display:flex;flex-direction:column;gap:2px}
-.brand-bar{height:6px;border-radius:3px;transition:width 1s ease}
-.brand-bar.prev{opacity:.3}
-.brand-pct{font-size:11px;font-weight:700;width:35px;text-align:right;font-family:'JetBrains Mono',monospace}
-.brand-chg{font-size:10px;font-weight:700;width:45px;text-align:right}
-.brand-chg.up{color:var(--ok)}.brand-chg.down{color:var(--err)}.brand-chg.flat{color:var(--tx3)}
-/* DONUT */
-.donut-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
-.donut-box{position:relative;width:160px;height:160px;margin-bottom:10px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.06))}
-.donut-svg{width:160px;height:160px;transform:rotate(-90deg)}
-.donut-seg{transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 1px 2px rgba(0,0,0,.1));cursor:pointer}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thien Long Group — Sector Performance Analysis Q1 2026</title>
+  <meta name="description"
+    content="Strategic Report Q1 2026: E-commerce Sector Performance Analysis for Thien Long Group">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --pri: #1a56db;
+      --pri-l: #3b82f6;
+      --pri-d: #1e40af;
+      --acc: #0ea5e9;
+      --ok: #10b981;
+      --ok-l: #d1fae5;
+      --err: #ef4444;
+      --warn: #f59e0b;
+      --org: #f97316;
+      --bg: #f0f4ff;
+      --sf: rgba(255, 255, 255, .82);
+      --sf-solid: #fff;
+      --sf2: #f8fafc;
+      --tx: #0f172a;
+      --tx2: #64748b;
+      --tx3: #94a3b8;
+      --bd: rgba(226, 232, 240, .7);
+      --sh-s: 0 1px 3px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .03);
+      --sh: 0 4px 16px rgba(0, 0, 0, .06), 0 1px 3px rgba(0, 0, 0, .04);
+      --sh-l: 0 20px 50px rgba(0, 0, 0, .08), 0 8px 20px rgba(0, 0, 0, .04);
+      --r: 18px;
+      --r-s: 12px;
+      --r-x: 8px;
+      --tr: all .35s cubic-bezier(.4, 0, .2, 1);
+      --glass: saturate(180%) blur(14px)
+    }
 
-.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.donut-center .dv{font-size:28px;font-weight:900;line-height:1}
-.donut-center .dl{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
-.brand-legend{width:100%}
-.brand-legend-item{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(226,232,240,.5);border-radius:var(--r-x);transition:var(--tr);margin-bottom:1px}
-.brand-legend-item:last-child{border-bottom:none}
-.brand-legend-item:hover{background:rgba(59,130,246,.04)}
-.bl-left{display:flex;align-items:center;gap:7px}
-.bl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,.15)}
-.bl-name{font-size:11.5px;font-weight:500}
-.bl-val{font-size:11px;font-weight:600}
-.bl-val.up{color:var(--ok)}.bl-val.down{color:var(--err)}.bl-val.flat{color:var(--tx)}
-/* PRICE SEGMENTS */
-.price-grid{display:flex;align-items:flex-end;gap:6px;height:140px;padding:24px 0 10px}
-.price-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;transition:var(--tr)}
-.price-col:hover{transform:translateY(-2px)}
-.price-bar-wrap{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
-.price-stack{width:85%;display:flex;flex-direction:column;border-radius:6px 6px 2px 2px;transition:height 1s cubic-bezier(.4,0,.2,1);position:relative;min-height:4px}
-.price-stack .seg{transition:height .8s ease;border-radius:6px 6px 2px 2px}
-.price-stack .pv{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:500;color:var(--tx);white-space:nowrap;font-family:'JetBrains Mono',monospace;text-align:center}
-.price-range{font-size:11px;font-weight:500;color:var(--tx);text-align:center;white-space:nowrap}
-.price-legend{display:flex;gap:14px;justify-content:flex-end;margin-top:6px}
-.price-legend .pl-item{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:600;color:var(--tx3)}
-.price-legend .pl-dot{width:8px;height:8px;border-radius:2px}
-/* PRODUCT TABLE */
-.tbl-wrap{background:var(--sf);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);border-radius:var(--r);border:1px solid var(--bd);overflow:hidden;position:relative;z-index:1;box-shadow:var(--sh-s)}
-.tbl-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1px solid var(--bd);background:linear-gradient(135deg,rgba(59,130,246,.03),rgba(99,102,241,.02))}
-.tbl-title{font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--tx)}
-.tbl-sub{font-size:10px;color:var(--tx3);font-style:italic}
-.tbl{width:100%;border-collapse:collapse}
-.tbl thead th{padding:10px 10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--tx3);text-align:left;border-bottom:2px solid var(--bd);background:var(--sf2);position:sticky;top:0}
-.tbl thead th:last-child,.tbl thead th:nth-child(n+4){text-align:right}
-.tbl tbody tr{border-bottom:1px solid rgba(226,232,240,.5);transition:all .2s ease}
-.tbl tbody tr:last-child{border-bottom:none}
-.tbl tbody tr:hover{background:linear-gradient(90deg,rgba(59,130,246,.04),rgba(99,102,241,.02));transform:scale(1.001)}
-.tbl tbody tr:nth-child(-n+3){background:linear-gradient(90deg,rgba(251,191,36,.03),transparent)}
-.tbl tbody tr:nth-child(-n+3):hover{background:linear-gradient(90deg,rgba(59,130,246,.06),rgba(251,191,36,.03))}
-.tbl td{padding:10px 10px;vertical-align:middle;font-size:11.5px}
-.tbl td:last-child,.tbl td:nth-child(n+4){text-align:right}
-.tbl .rk{width:32px;text-align:center!important}
-.rk-badge{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.15)}
-.rk-1{background:linear-gradient(135deg,#fbbf24,#d97706)}
-.rk-2{background:linear-gradient(135deg,#94a3b8,#64748b)}
-.rk-3{background:linear-gradient(135deg,#d97706,#b45309)}
-.rk-d{background:var(--tx3)}
-.td-prod .pn{font-weight:700;color:var(--tx);line-height:1.2;font-size:12px}
-.td-prod .pb{font-size:9px;color:var(--tx2);text-transform:uppercase;font-weight:800;letter-spacing:.5px;margin-top:5px;background:linear-gradient(135deg,var(--sf2),#f1f5f9);padding:2px 8px;border-radius:5px;border:1px solid var(--bd);display:inline-block;box-shadow:var(--sh-s)}
-.ch-pill{display:inline-flex;padding:4px 12px;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;transition:var(--tr)}
-.ch-shopee{background:linear-gradient(135deg,#fff7ed,#ffedd5);color:#ea580c;border:1px solid #fed7aa}
-.ch-tiktok{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.ch-lazada{background:linear-gradient(135deg,#eff6ff,#dbeafe);color:#1d4ed8;border:1px solid #bfdbfe}
-.td-rev{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--tx)}
-.td-g{font-size:10.5px;font-weight:700;white-space:nowrap}
-.td-g.up{color:var(--ok)}.td-g.down{color:var(--err)}
-.td-link{text-align:center;width:36px}
-.prod-link{text-decoration:none;font-size:14px;opacity:.6;transition:all .25s ease;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px}
-.prod-link:hover{opacity:1;background:rgba(59,130,246,.08)}
-.td-num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:11.5px;color:var(--tx)}
-/* FOOTER */
-.footer{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;margin-top:auto;border-top:1px solid var(--bd);position:relative;z-index:1}
-.footer-left{font-size:11px;color:var(--tx3);font-weight:500}
-.footer-right{display:flex;align-items:center;gap:16px}
-.page-ind{display:flex;gap:6px}
-.page-dot{width:8px;height:8px;border-radius:50%;background:var(--bd);transition:var(--tr);cursor:pointer}
-.page-dot.active{background:linear-gradient(135deg,var(--pri),#4f46e5);width:24px;border-radius:4px;box-shadow:0 2px 6px rgba(26,86,219,.3)}
-.nav-btn{width:38px;height:38px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);color:var(--tx2);font-size:16px}
-.nav-btn:hover{background:linear-gradient(135deg,var(--pri),#4f46e5);color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(26,86,219,.35);transform:translateY(-1px)}
-.watermark{position:fixed;bottom:8px;right:16px;font-size:9px;color:var(--tx3);opacity:.4;z-index:10;letter-spacing:.5px}
-/* ANIM */
-.fade-content{transition:opacity .4s cubic-bezier(.4,0,.2,1),transform .4s cubic-bezier(.4,0,.2,1)}.fade-content.fading{opacity:0;transform:translateY(10px) scale(.99)}
-.ani{opacity:0;transform:translateY(18px);animation:su .6s cubic-bezier(.4,0,.2,1) forwards}
-@keyframes su{to{opacity:1;transform:translateY(0)}}
-.d1{animation-delay:.08s}.d2{animation-delay:.14s}.d3{animation-delay:.2s}.d4{animation-delay:.26s}.d5{animation-delay:.32s}
-/* STAGGER KPI */
-.kpi-card{opacity:0;animation:kpiIn .5s cubic-bezier(.4,0,.2,1) forwards}
-.kpi-card:nth-child(1){animation-delay:.1s}.kpi-card:nth-child(2){animation-delay:.18s}.kpi-card:nth-child(3){animation-delay:.26s}.kpi-card:nth-child(4){animation-delay:.34s}
-@keyframes kpiIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-/* RESPONSIVE */
-@media(max-width:1200px){.slide{padding:24px 32px}.kpi-grid{grid-template-columns:repeat(2,1fr)}.content-grid,.prod-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.slide{padding:16px}.header{flex-direction:column;align-items:flex-start;gap:16px}.kpi-grid,.prod-grid{grid-template-columns:1fr}.header h1{font-size:22px}}
-@media print{.slide{min-height:auto;page-break-after:always}.nav-btn,.watermark{display:none}body{background:#fff}.kpi-card,.card,.tbl-wrap{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff}}
-</style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--tx);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh
+    }
+
+    .slide-container {
+      width: 100%;
+      min-height: 100vh;
+      position: relative
+    }
+
+    .slide {
+      display: none;
+      min-height: 100vh;
+      padding: 28px 44px;
+      animation: slideEnter .7s cubic-bezier(.4, 0, .2, 1);
+      position: relative;
+      overflow: hidden;
+      flex-direction: column
+    }
+
+    .slide.active {
+      display: flex
+    }
+
+    @keyframes slideEnter {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(.995)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    /* MESH GRADIENT BACKGROUND */
+    .bg-dec {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform
+    }
+
+    .bg-dec.blue {
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      width: 700px;
+      height: 700px;
+      top: -250px;
+      right: -150px;
+      opacity: .12;
+      animation: meshFloat 20s ease-in-out infinite
+    }
+
+    .bg-dec.cyan {
+      background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+      width: 500px;
+      height: 500px;
+      bottom: -150px;
+      left: -100px;
+      opacity: .1;
+      animation: meshFloat 25s ease-in-out infinite reverse
+    }
+
+    @keyframes meshFloat {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(0deg)
+      }
+
+      25% {
+        transform: translate(30px, -20px) rotate(5deg)
+      }
+
+      50% {
+        transform: translate(-20px, 30px) rotate(-3deg)
+      }
+
+      75% {
+        transform: translate(15px, 15px) rotate(2deg)
+      }
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pri)
+    }
+
+    .badge::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pri), #6366f1, var(--acc));
+      border-radius: 2px;
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite
+    }
+
+    @keyframes shimmer {
+
+      0%,
+      100% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--tx), var(--pri-d));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .header .subtitle {
+      font-size: 13px;
+      color: var(--tx2)
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--sf);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      padding: 4px;
+      border-radius: 14px;
+      box-shadow: var(--sh-s);
+      border: 1px solid var(--bd)
+    }
+
+    .nav-tab {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--tr);
+      border: none;
+      background: transparent;
+      color: var(--tx2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, var(--pri), #4f46e5);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(26, 86, 219, .35), inset 0 1px 0 rgba(255, 255, 255, .15)
+    }
+
+    .nav-tab:hover:not(.active) {
+      background: rgba(59, 130, 246, .06);
+      color: var(--tx)
+    }
+
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255, 255, 255, .1));
+      opacity: 0;
+      transition: var(--tr)
+    }
+
+    .nav-tab:hover::after {
+      opacity: 1
+    }
+
+    /* FILTERS */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap
+    }
+
+    .filter-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: var(--tx2);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap
+    }
+
+    .filter-pill {
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--tr);
+      border: 1.5px solid var(--bd);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--tx2);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      position: relative
+    }
+
+    .filter-pill:hover {
+      border-color: var(--pri-l);
+      color: var(--pri);
+      background: rgba(239, 246, 255, .9);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, .12)
+    }
+
+    .filter-pill.active {
+      background: linear-gradient(135deg, var(--pri), #4f46e5);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(26, 86, 219, .3), inset 0 1px 0 rgba(255, 255, 255, .15)
+    }
+
+    .filter-pill .pi {
+      font-size: 13px
+    }
+
+    .filter-pill:not(.active) .pc {
+      background: var(--bg);
+      color: var(--tx3)
+    }
+
+    .filter-pill .pc {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .25);
+      min-width: 18px;
+      text-align: center
+    }
+
+    /* KPI */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1
+    }
+
+    .kpi-card {
+      background: var(--sf);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      border-radius: var(--r);
+      padding: 16px 18px;
+      border: 1px solid var(--bd);
+      box-shadow: var(--sh-s);
+      transition: var(--tr);
+      position: relative;
+      overflow: hidden
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--sh-l);
+      border-color: rgba(59, 130, 246, .3)
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pri), #6366f1, var(--acc));
+      opacity: 0;
+      transition: var(--tr);
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite
+    }
+
+    .kpi-card:hover::before {
+      opacity: 1
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(59, 130, 246, .04), transparent);
+      border-radius: 50%;
+      pointer-events: none
+    }
+
+    .kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      margin-bottom: 8px;
+      transition: var(--tr)
+    }
+
+    .kpi-card:hover .kpi-icon {
+      transform: scale(1.1)
+    }
+
+    .kpi-icon.blue {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      color: var(--pri)
+    }
+
+    .kpi-icon.green {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      color: var(--ok)
+    }
+
+    .kpi-icon.purple {
+      background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+      color: #8b5cf6
+    }
+
+    .kpi-icon.orange {
+      background: linear-gradient(135deg, #fff7ed, #ffedd5);
+      color: var(--org)
+    }
+
+    .kpi-icon.teal {
+      background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+      color: #14b8a6
+    }
+
+    .kpi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .kpi-growth {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ok);
+      background: var(--ok-l);
+      padding: 2px 8px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      letter-spacing: .3px
+    }
+
+    .kpi-growth.down {
+      color: var(--err);
+      background: #fee2e2
+    }
+
+    .kpi-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--tx2);
+      margin-bottom: 3px
+    }
+
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.1;
+      color: var(--tx)
+    }
+
+    .kpi-value .unit {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--tx3)
+    }
+
+    .kpi-sub {
+      font-size: 10px;
+      color: var(--tx3);
+      margin-top: 3px;
+      font-weight: 500
+    }
+
+    /* CARDS & GRIDS */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 16px
+    }
+
+    .content-grid.full {
+      grid-template-columns: 1fr
+    }
+
+    .card {
+      background: var(--sf);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      border-radius: var(--r);
+      padding: 20px;
+      border: 1px solid var(--bd);
+      box-shadow: var(--sh-s);
+      transition: var(--tr)
+    }
+
+    .card:hover {
+      box-shadow: var(--sh);
+      border-color: rgba(59, 130, 246, .15)
+    }
+
+    .card-hdr {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px
+    }
+
+    .card-hdr .ic {
+      font-size: 16px
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--tx)
+    }
+
+    /* PLATFORM COMPARISON BARS */
+    .plat-item {
+      margin-bottom: 14px;
+      padding: 8px 10px;
+      border-radius: var(--r-s);
+      transition: var(--tr)
+    }
+
+    .plat-item:last-child {
+      margin-bottom: 0
+    }
+
+    .plat-item:hover {
+      background: rgba(59, 130, 246, .03)
+    }
+
+    .plat-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px
+    }
+
+    .plat-name {
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .plat-name .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .15)
+    }
+
+    .plat-change {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ok);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, .08)
+    }
+
+    .plat-change.down {
+      color: var(--err);
+      background: rgba(239, 68, 68, .08)
+    }
+
+    .plat-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 3px
+    }
+
+    .plat-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .plat-bar-row .yr {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--tx3);
+      width: 46px;
+      text-align: right
+    }
+
+    .plat-bar-row .track {
+      flex: 1;
+      height: 8px;
+      background: linear-gradient(90deg, rgba(241, 245, 249, .8), var(--bg));
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    .plat-bar-row .fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1.2s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .plat-bar-row .val {
+      font-size: 12px;
+      font-weight: 700;
+      width: 60px;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .plat-bar-row.prev .fill {
+      opacity: .3
+    }
+
+    /* BRAND SHARE */
+    .brand-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--bd)
+    }
+
+    .brand-item:last-child {
+      border-bottom: none
+    }
+
+    .brand-rank {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--tx3);
+      width: 16px;
+      text-align: center
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .brand-name {
+      font-size: 12px;
+      font-weight: 600;
+      flex: 1;
+      min-width: 0
+    }
+
+    .brand-bar-wrap {
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .brand-bar {
+      height: 6px;
+      border-radius: 3px;
+      transition: width 1s ease
+    }
+
+    .brand-bar.prev {
+      opacity: .3
+    }
+
+    .brand-pct {
+      font-size: 11px;
+      font-weight: 700;
+      width: 35px;
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .brand-chg {
+      font-size: 10px;
+      font-weight: 700;
+      width: 45px;
+      text-align: right
+    }
+
+    .brand-chg.up {
+      color: var(--ok)
+    }
+
+    .brand-chg.down {
+      color: var(--err)
+    }
+
+    .brand-chg.flat {
+      color: var(--tx3)
+    }
+
+    /* DONUT */
+    .donut-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 14px
+    }
+
+    .donut-box {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .06))
+    }
+
+    .donut-svg {
+      width: 160px;
+      height: 160px;
+      transform: rotate(-90deg)
+    }
+
+    .donut-seg {
+      transition: stroke-dashoffset 1.2s cubic-bezier(.4, 0, .2, 1);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .1));
+      cursor: pointer
+    }
+
+    .donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center
+    }
+
+    .donut-center .dv {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1
+    }
+
+    .donut-center .dl {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 2px
+    }
+
+    .brand-legend {
+      width: 100%
+    }
+
+    .brand-legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(226, 232, 240, .5);
+      border-radius: var(--r-x);
+      transition: var(--tr);
+      margin-bottom: 1px
+    }
+
+    .brand-legend-item:last-child {
+      border-bottom: none
+    }
+
+    .brand-legend-item:hover {
+      background: rgba(59, 130, 246, .04)
+    }
+
+    .bl-left {
+      display: flex;
+      align-items: center;
+      gap: 7px
+    }
+
+    .bl-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .15)
+    }
+
+    .bl-name {
+      font-size: 11.5px;
+      font-weight: 500
+    }
+
+    .bl-val {
+      font-size: 11px;
+      font-weight: 600
+    }
+
+    .bl-val.up {
+      color: var(--ok)
+    }
+
+    .bl-val.down {
+      color: var(--err)
+    }
+
+    .bl-val.flat {
+      color: var(--tx)
+    }
+
+    /* PRICE SEGMENTS */
+    .price-grid {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 140px;
+      padding: 24px 0 10px
+    }
+
+    .price-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+      transition: var(--tr)
+    }
+
+    .price-col:hover {
+      transform: translateY(-2px)
+    }
+
+    .price-bar-wrap {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center
+    }
+
+    .price-stack {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 6px 6px 2px 2px;
+      transition: height 1s cubic-bezier(.4, 0, .2, 1);
+      position: relative;
+      min-height: 4px
+    }
+
+    .price-stack .seg {
+      transition: height .8s ease;
+      border-radius: 6px 6px 2px 2px
+    }
+
+    .price-stack .pv {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--tx2);
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      text-align: center
+    }
+
+    .price-range {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--tx3);
+      text-align: center;
+      white-space: nowrap
+    }
+
+    .price-legend {
+      display: flex;
+      gap: 14px;
+      justify-content: flex-end;
+      margin-top: 6px
+    }
+
+    .price-legend .pl-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--tx3)
+    }
+
+    .price-legend .pl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px
+    }
+
+    /* PRODUCT TABLE */
+    .tbl-wrap {
+      background: var(--sf);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      border-radius: var(--r);
+      border: 1px solid var(--bd);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--sh-s)
+    }
+
+    .tbl-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 14px;
+      border-bottom: 1px solid var(--bd);
+      background: linear-gradient(135deg, rgba(59, 130, 246, .03), rgba(99, 102, 241, .02))
+    }
+
+    .tbl-title {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: var(--tx)
+    }
+
+    .tbl-sub {
+      font-size: 10px;
+      color: var(--tx3);
+      font-style: italic
+    }
+
+    .tbl {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .tbl thead th {
+      padding: 10px 10px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--tx3);
+      text-align: left;
+      border-bottom: 2px solid var(--bd);
+      background: var(--sf2);
+      position: sticky;
+      top: 0
+    }
+
+    .tbl thead th:last-child,
+    .tbl thead th:nth-child(n+4) {
+      text-align: right
+    }
+
+    .tbl tbody tr {
+      border-bottom: 1px solid rgba(226, 232, 240, .5);
+      transition: all .2s ease
+    }
+
+    .tbl tbody tr:last-child {
+      border-bottom: none
+    }
+
+    .tbl tbody tr:hover {
+      background: linear-gradient(90deg, rgba(59, 130, 246, .04), rgba(99, 102, 241, .02));
+      transform: scale(1.001)
+    }
+
+    .tbl tbody tr:nth-child(-n+3) {
+      background: linear-gradient(90deg, rgba(251, 191, 36, .03), transparent)
+    }
+
+    .tbl tbody tr:nth-child(-n+3):hover {
+      background: linear-gradient(90deg, rgba(59, 130, 246, .06), rgba(251, 191, 36, .03))
+    }
+
+    .tbl td {
+      padding: 10px 10px;
+      vertical-align: middle;
+      font-size: 11.5px
+    }
+
+    .tbl td:last-child,
+    .tbl td:nth-child(n+4) {
+      text-align: right
+    }
+
+    .tbl .rk {
+      width: 32px;
+      text-align: center !important
+    }
+
+    .rk-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .15)
+    }
+
+    .rk-1 {
+      background: linear-gradient(135deg, #fbbf24, #d97706)
+    }
+
+    .rk-2 {
+      background: linear-gradient(135deg, #94a3b8, #64748b)
+    }
+
+    .rk-3 {
+      background: linear-gradient(135deg, #d97706, #b45309)
+    }
+
+    .rk-d {
+      background: var(--tx3)
+    }
+
+    .td-prod .pn {
+      font-weight: 700;
+      color: var(--tx);
+      line-height: 1.2;
+      font-size: 12px
+    }
+
+    .td-prod .pb {
+      font-size: 9px;
+      color: var(--tx2);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: .5px;
+      margin-top: 5px;
+      background: linear-gradient(135deg, var(--sf2), #f1f5f9);
+      padding: 2px 8px;
+      border-radius: 5px;
+      border: 1px solid var(--bd);
+      display: inline-block;
+      box-shadow: var(--sh-s)
+    }
+
+    .ch-pill {
+      display: inline-flex;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: var(--tr)
+    }
+
+    .ch-shopee {
+      background: linear-gradient(135deg, #fff7ed, #ffedd5);
+      color: #ea580c;
+      border: 1px solid #fed7aa
+    }
+
+    .ch-tiktok {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2)
+    }
+
+    .ch-lazada {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe
+    }
+
+    .td-rev {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--tx)
+    }
+
+    .td-g {
+      font-size: 10.5px;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .td-g.up {
+      color: var(--ok)
+    }
+
+    .td-g.down {
+      color: var(--err)
+    }
+
+    .td-link {
+      text-align: center;
+      width: 36px
+    }
+
+    .prod-link {
+      text-decoration: none;
+      font-size: 14px;
+      opacity: .6;
+      transition: all .25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px
+    }
+
+    .prod-link:hover {
+      opacity: 1;
+      background: rgba(59, 130, 246, .08)
+    }
+
+    .td-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 11.5px;
+      color: var(--tx)
+    }
+
+    /* FOOTER */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0 0;
+      margin-top: auto;
+      border-top: 1px solid var(--bd);
+      position: relative;
+      z-index: 1
+    }
+
+    .footer-left {
+      font-size: 11px;
+      color: var(--tx3);
+      font-weight: 500
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 16px
+    }
+
+    .page-ind {
+      display: flex;
+      gap: 6px
+    }
+
+    .page-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bd);
+      transition: var(--tr);
+      cursor: pointer
+    }
+
+    .page-dot.active {
+      background: linear-gradient(135deg, var(--pri), #4f46e5);
+      width: 24px;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(26, 86, 219, .3)
+    }
+
+    .nav-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid var(--bd);
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--tr);
+      color: var(--tx2);
+      font-size: 16px
+    }
+
+    .nav-btn:hover {
+      background: linear-gradient(135deg, var(--pri), #4f46e5);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(26, 86, 219, .35);
+      transform: translateY(-1px)
+    }
+
+    .watermark {
+      position: fixed;
+      bottom: 8px;
+      right: 16px;
+      font-size: 9px;
+      color: var(--tx3);
+      opacity: .4;
+      z-index: 10;
+      letter-spacing: .5px
+    }
+
+    /* ANIM */
+    .fade-content {
+      transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .fade-content.fading {
+      opacity: 0;
+      transform: translateY(10px) scale(.99)
+    }
+
+    .ani {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: su .6s cubic-bezier(.4, 0, .2, 1) forwards
+    }
+
+    @keyframes su {
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .d1 {
+      animation-delay: .08s
+    }
+
+    .d2 {
+      animation-delay: .14s
+    }
+
+    .d3 {
+      animation-delay: .2s
+    }
+
+    .d4 {
+      animation-delay: .26s
+    }
+
+    .d5 {
+      animation-delay: .32s
+    }
+
+    /* STAGGER KPI */
+    .kpi-card {
+      opacity: 0;
+      animation: kpiIn .5s cubic-bezier(.4, 0, .2, 1) forwards
+    }
+
+    .kpi-card:nth-child(1) {
+      animation-delay: .1s
+    }
+
+    .kpi-card:nth-child(2) {
+      animation-delay: .18s
+    }
+
+    .kpi-card:nth-child(3) {
+      animation-delay: .26s
+    }
+
+    .kpi-card:nth-child(4) {
+      animation-delay: .34s
+    }
+
+    @keyframes kpiIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(.97)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1200px) {
+      .slide {
+        padding: 24px 32px
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .content-grid,
+      .prod-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:768px) {
+      .slide {
+        padding: 16px
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px
+      }
+
+      .kpi-grid,
+      .prod-grid {
+        grid-template-columns: 1fr
+      }
+
+      .header h1 {
+        font-size: 22px
+      }
+    }
+
+    @media print {
+      .slide {
+        min-height: auto;
+        page-break-after: always
+      }
+
+      .nav-btn,
+      .watermark {
+        display: none
+      }
+
+      body {
+        background: #fff
+      }
+
+      .kpi-card,
+      .card,
+      .tbl-wrap {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: #fff
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="slide-container">
-<!-- SLIDE 1 -->
-<div class="slide active" id="slide1">
-<div class="bg-dec blue"></div><div class="bg-dec cyan"></div>
-<div class="header ani"><div class="header-left"><div class="badge">Strategic Report Q1 2026</div><h1>Sector Performance Analysis</h1><p class="subtitle">Deep-Dive Analysis: Metric Data &amp; E-commerce Market Trends</p></div>
-<div class="nav-tabs"><button class="nav-tab active" onclick="goTo(1)">📊 Executive Overview</button><button class="nav-tab" onclick="goTo(2)">🔍 Segment Deep-Dive</button></div></div>
-<div id="catF1" class="filter-bar ani d1"></div>
-<div id="subF1" class="filter-bar ani d2"></div>
-<div id="kpi1" class="kpi-grid fade-content"></div>
-<div id="charts1" class="content-grid fade-content"></div>
-<div id="priceSection1" class="fade-content" style="position:relative;z-index:1;margin-bottom:12px"></div>
-<div class="footer ani d5"><div class="footer-left">Thien Long Group — Confidential | E-commerce Intelligence Report</div><div class="footer-right"><div class="page-ind"><div class="page-dot active" onclick="goTo(1)"></div><div class="page-dot" onclick="goTo(2)"></div></div><button class="nav-btn" onclick="goTo(2)" title="Next">→</button></div></div>
-</div>
-<!-- SLIDE 2 -->
-<div class="slide" id="slide2">
-<div class="bg-dec blue"></div><div class="bg-dec cyan"></div>
-<div class="header ani"><div class="header-left"><div class="badge">Strategic Report Q1 2026</div><h1>Sector Performance Analysis</h1><p class="subtitle">Deep-Dive Analysis: Metric Data &amp; E-commerce Market Trends</p></div>
-<div class="nav-tabs"><button class="nav-tab" onclick="goTo(1)">📊 Executive Overview</button><button class="nav-tab active" onclick="goTo(2)">🔍 Segment Deep-Dive</button></div></div>
-<div id="catF2" class="filter-bar ani d1"></div>
-<div id="subF2" class="filter-bar ani d2"></div>
-<div id="kpi2" class="kpi-grid fade-content"></div>
-<div id="prodGrid2" class="fade-content" style="position:relative;z-index:1"></div>
-<div class="footer ani d5"><div class="footer-left">Thien Long Group — Confidential | E-commerce Intelligence Report</div><div class="footer-right"><div class="page-ind"><div class="page-dot" onclick="goTo(1)"></div><div class="page-dot active" onclick="goTo(2)"></div></div><button class="nav-btn" onclick="goTo(1)" title="Prev">←</button></div></div>
-</div>
-</div>
-<div class="watermark">Thien Long Group © 2026 | Generated Report</div>
+  <div class="slide-container">
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide1">
+      <div class="bg-dec blue"></div>
+      <div class="bg-dec cyan"></div>
+      <div class="header ani">
+        <div class="header-left">
+          <div class="badge">Strategic Report Q1 2026</div>
+          <h1>Sector Performance Analysis</h1>
+          <p class="subtitle">Deep-Dive Analysis: Metric Data &amp; E-commerce Market Trends</p>
+        </div>
+        <div class="nav-tabs"><button class="nav-tab active" onclick="goTo(1)">📊 Executive Overview</button><button
+            class="nav-tab" onclick="goTo(2)">🔍 Segment Deep-Dive</button></div>
+      </div>
+      <div id="catF1" class="filter-bar ani d1"></div>
+      <div id="subF1" class="filter-bar ani d2"></div>
+      <div id="kpi1" class="kpi-grid fade-content"></div>
+      <div id="charts1" class="content-grid fade-content"></div>
+      <div id="priceSection1" class="fade-content" style="position:relative;z-index:1;margin-bottom:12px"></div>
+      <div class="footer ani d5">
+        <div class="footer-left">Thien Long Group — Confidential | E-commerce Intelligence Report</div>
+        <div class="footer-right">
+          <div class="page-ind">
+            <div class="page-dot active" onclick="goTo(1)"></div>
+            <div class="page-dot" onclick="goTo(2)"></div>
+          </div><button class="nav-btn" onclick="goTo(2)" title="Next">→</button>
+        </div>
+      </div>
+    </div>
+    <!-- SLIDE 2 -->
+    <div class="slide" id="slide2">
+      <div class="bg-dec blue"></div>
+      <div class="bg-dec cyan"></div>
+      <div class="header ani">
+        <div class="header-left">
+          <div class="badge">Strategic Report Q1 2026</div>
+          <h1>Sector Performance Analysis</h1>
+          <p class="subtitle">Deep-Dive Analysis: Metric Data &amp; E-commerce Market Trends</p>
+        </div>
+        <div class="nav-tabs"><button class="nav-tab" onclick="goTo(1)">📊 Executive Overview</button><button
+            class="nav-tab active" onclick="goTo(2)">🔍 Segment Deep-Dive</button></div>
+      </div>
+      <div id="catF2" class="filter-bar ani d1"></div>
+      <div id="subF2" class="filter-bar ani d2"></div>
+      <div id="kpi2" class="kpi-grid fade-content"></div>
+      <div id="prodGrid2" class="fade-content" style="position:relative;z-index:1"></div>
+      <div class="footer ani d5">
+        <div class="footer-left">Thien Long Group — Confidential | E-commerce Intelligence Report</div>
+        <div class="footer-right">
+          <div class="page-ind">
+            <div class="page-dot" onclick="goTo(1)"></div>
+            <div class="page-dot active" onclick="goTo(2)"></div>
+          </div><button class="nav-btn" onclick="goTo(1)" title="Prev">←</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="watermark">Thien Long Group © 2026 | Generated Report</div>
 
-<script src="ecom_data_q1.js"></script>
-<script>
-/* ===== STATE ===== */
-let curCat='all', curSub='all', curSlide=1;
-function getData(){
-const d=CAT[curCat];
-if(curSub!=='all'&&d.sdata&&d.sdata[curSub]){
-const sd=d.sdata[curSub];
-return {n:d.n,i:d.i,sc:d.sc,kpi:sd.kpi||d.kpi,dkpi:sd.dkpi||d.dkpi,plat:sd.plat||d.plat,brand:sd.brand||d.brand,price:sd.price||d.price,prod:sd.prod||d.prod,_sub:true};
-}
-return {dkpi:d.dkpi||d.kpi, ...d};
-}
+  <script src="ecom_data_q1.js"></script>
+  <script>
+    /* ===== STATE ===== */
+    let curCat = 'all', curSub = 'all', curSlide = 1, _rt = null;
+    const EL = {};
+    function getData() {
+      const d = CAT[curCat];
+      if (curSub !== 'all' && d.sdata && d.sdata[curSub]) {
+        const sd = d.sdata[curSub];
+        return { n: d.n, i: d.i, sc: d.sc, kpi: sd.kpi || d.kpi, dkpi: sd.dkpi || d.dkpi, plat: sd.plat || d.plat, brand: sd.brand || d.brand, price: sd.price || d.price, prod: sd.prod || d.prod, _sub: true };
+      }
+      return { dkpi: d.dkpi || d.kpi, ...d };
+    }
 
-/* ===== ICONS ===== */
-const KI={blue:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>',green:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',purple:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',orange:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',teal:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'};
+    /* ===== ICONS ===== */
+    const KI = { blue: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>', green: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>', purple: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', orange: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>', teal: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>' };
 
-/* ===== RENDER ===== */
-function renderCatFilter(slideN){
-const el=document.getElementById('catF'+slideN);
-el.innerHTML=`<div class="filter-label">🏷️ Category</div><div class="filter-pills">${Object.entries(CAT).map(([k,v])=>`<button class="filter-pill${k===curCat?' active':''}" onclick="setCat('${k}')"><span class="pi">${v.i}</span>${v.n}</button>`).join('')}</div>`;
-}
-function renderSubFilter(slideN){
-const d=CAT[curCat],el=document.getElementById('subF'+slideN);
-el.innerHTML=`<div class="filter-label">📂 Sub-category</div><div class="filter-pills">${d.sc.map(s=>`<button class="filter-pill${s.k===curSub?' active':''}" onclick="setSub('${s.k}')"><span class="pi">${s.i}</span>${s.n}</button>`).join('')}</div>`;
-}
-function renderExecKPIs(){
-const d=getData();
-const isNeg=v=>v&&v.startsWith('-');
-document.getElementById('kpi1').innerHTML=d.kpi.map((k,i)=>{const neg=isNeg(k.g);const arrow=neg?'↘':'↗';const cls=neg?' down':'';return`<div class="kpi-card ani d${i+1}"><div class="kpi-top"><div class="kpi-icon ${k.ic}">${KI[k.ic]}</div>${k.g?`<span class="kpi-growth${cls}">${arrow} ${k.g}</span>`:''}</div><p class="kpi-label">${k.l}</p><p class="kpi-value">${k.v} <span class="unit">${k.u}</span></p>${k.sub?`<p class="kpi-sub">${k.sub}</p>`:''}</div>`}).join('');
-}
-function renderKPIs(targetId){
-const d=getData();
-const isNeg=v=>v&&v.startsWith('-');
-const dkpis=d.dkpi.map(k=>{
-if(k.l==='Leading Brand'){
-const topB=d.brand[0];
-if(topB){
-let prods=d._sub?d.prod:(curSub==='all'?d.prod:d.prod.filter(p=>p.sc===curSub));
-if(prods.length===0)prods=d.prod;
-let top10Prods = prods.slice(0, 10);
-const norm=s=>s?s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""):'';
-const topBN=norm(topB.n);
-const count=top10Prods.filter(p=>{const pBN=norm(p.br);return pBN.includes(topBN)||topBN.includes(pBN)||(topBN.includes('thien long')&&pBN.includes('tl'))||(topBN.includes('tl')&&pBN.includes('thien long'))}).length;
-return {...k,v:`${topB.n} (${parseFloat(topB.cur).toFixed(2)}%)`,sub:`${count}/10 Top SKU Spots`};
-}
-}
-return k;
-});
-document.getElementById(targetId).innerHTML=dkpis.map((k,i)=>{const neg=isNeg(k.g);const arrow=neg?'↘':'↗';const cls=neg?' down':'';return`<div class="kpi-card ani d${i+1}"><div class="kpi-top"><div class="kpi-icon ${k.ic}">${KI[k.ic]}</div>${k.g?`<span class="kpi-growth${cls}">${arrow} ${k.g}</span>`:''}</div><p class="kpi-label">${k.l}</p><p class="kpi-value">${k.v} ${k.u?`<span class="unit">${k.u}</span>`:''}</p>${k.sub?`<p class="kpi-sub">${k.sub}</p>`:''}</div>`}).join('');
-}
-function renderCharts(){
-const d=getData(),mx=Math.max(...d.plat.map(p=>Math.max(p.cur,p.pre)));
-const pFmt=v=>v>=1?v.toFixed(1)+' tỷ':(v*1000).toFixed(1)+' tr';
-const platHTML=d.plat.map(p=>{const gc=p.cur>p.pre?'up':'down';const gv=((p.cur-p.pre)/p.pre*100).toFixed(0);const arrow=gc==='up'?'↗':'↘';return`<div class="plat-item"><div class="plat-head"><span class="plat-name"><span class="dot" style="background:${p.c}"></span>${p.n}</span><span class="plat-change ${gc}">${arrow} ${gc==='up'?'+':''}${gv}%</span></div><div class="plat-bars"><div class="plat-bar-row prev"><span class="yr">Q1 2025</span><div class="track"><div class="fill" style="width:${p.pre/mx*100}%;background:${p.c}"></div></div><span class="val">${pFmt(p.pre)}</span></div><div class="plat-bar-row"><span class="yr">Q1 2026</span><div class="track"><div class="fill" style="width:${p.cur/mx*100}%;background:${p.c}"></div></div><span class="val">${pFmt(p.cur)}</span></div></div></div>`}).join('');
-// Donut chart for brand share
-const R=52,CX=60,CY=60,SW=12,C=2*Math.PI*R;
-let offset=0;
-const segs=d.brand.map(b=>{const len=b.cur/100*C;const gap=1.5;const s=`<circle class="donut-seg" cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="${b.c}" stroke-width="${SW}" stroke-dasharray="${Math.max(len-gap,0)} ${C-Math.max(len-gap,0)}" stroke-dashoffset="${-offset}" stroke-linecap="round" style="transform-origin:${CX}px ${CY}px"/>`;offset+=len;return s}).join('');
-const topBrand=d.brand[0];
-const topVal=Math.round(topBrand.cur*10)/10;
-const centerStyle = `color:${topBrand.c}`;
-const donutSVG=`<div class="donut-wrap"><div class="donut-box"><svg class="donut-svg" viewBox="0 0 120 120"><circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="var(--bd)" stroke-width="${SW}" opacity=".25"/>${segs}</svg><div class="donut-center"><div class="dv" style="${centerStyle}">${topVal}%</div><div class="dl" style="${centerStyle}">${topBrand.n}</div></div></div></div>`;
-const legendHTML=d.brand.map(b=>{
-const cur=Math.round(b.cur*10)/10;
-const diff=Math.round((b.cur-b.pre)*10)/10;
-const cls=diff>0?'up':diff<0?'down':'flat';
-const val=diff==0?'Stable':(diff>0?`+${diff}`:diff)+'pp YoY';
-return`<div class="brand-legend-item"><div class="bl-left"><span class="bl-dot" style="background:${b.c}"></span><span class="bl-name">${b.n}</span></div><span class="bl-val ${cls}">${cur}% (${val})</span></div>`}).join('');
-document.getElementById('charts1').innerHTML=`<div class="card"><div class="card-hdr"><span class="ic">📈</span><h2 class="card-title">Growth Dynamics by Platform</h2></div>${platHTML}</div><div class="card"><div class="card-hdr"><span class="ic">🌐</span><h2 class="card-title">Brand Landscape Q1 2026</h2></div>${donutSVG}<div class="brand-legend">${legendHTML}</div></div>`;
-}
-function renderPrice(){
-  if(curCat==='all'){
-    const cats=['but_viet','hoc_cu','my_thuat','van_phong_pham'];
-    let mx=0;
-    cats.forEach(k=>{
-      if(!CAT[k])return;
-      const gV=s=>{let m=String(s).match(/[\d.]+/);return m?parseFloat(m[0]):0;};
-      let c=gV(CAT[k].kpi[0].v),p=gV(CAT[k].kpi[0].sub);
-      if(c>mx)mx=c;if(p>mx)mx=p;
+    /* ===== RENDER ===== */
+    function renderCatFilter(slideN) {
+      const el = EL['catF' + slideN];
+      el.innerHTML = `<div class="filter-label">🏷️ Category</div><div class="filter-pills">${Object.entries(CAT).map(([k, v]) => `<button class="filter-pill${k === curCat ? ' active' : ''}" onclick="setCat('${k}')"><span class="pi">${v.i}</span>${v.n}</button>`).join('')}</div>`;
+    }
+    function renderSubFilter(slideN) {
+      const d = CAT[curCat], el = EL['subF' + slideN];
+      el.innerHTML = `<div class="filter-label">📂 Sub-category</div><div class="filter-pills">${d.sc.map(s => `<button class="filter-pill${s.k === curSub ? ' active' : ''}" onclick="setSub('${s.k}')"><span class="pi">${s.i}</span>${s.n}</button>`).join('')}</div>`;
+    }
+    function renderExecKPIs(d) {
+      const isNeg = v => v && v.startsWith('-');
+      EL.kpi1.innerHTML = d.kpi.map((k, i) => { const neg = isNeg(k.g); const arrow = neg ? '↘' : '↗'; const cls = neg ? ' down' : ''; return `<div class="kpi-card ani d${i + 1}"><div class="kpi-top"><div class="kpi-icon ${k.ic}">${KI[k.ic]}</div>${k.g ? `<span class="kpi-growth${cls}">${arrow} ${k.g}</span>` : ''}</div><p class="kpi-label">${k.l}</p><p class="kpi-value">${k.v} <span class="unit">${k.u}</span></p>${k.sub ? `<p class="kpi-sub">${k.sub}</p>` : ''}</div>` }).join('');
+    }
+    function renderKPIs(targetId, d) {
+      const isNeg = v => v && v.startsWith('-');
+      const dkpis = d.dkpi.map(k => {
+        if (k.l === 'Leading Brand') {
+          const topB = d.brand[0];
+          if (topB) {
+            let prods = d._sub ? d.prod : (curSub === 'all' ? d.prod : d.prod.filter(p => p.sc === curSub));
+            if (prods.length === 0) prods = d.prod;
+            let top10Prods = prods.slice(0, 10);
+            const norm = s => s ? s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';
+            const topBN = norm(topB.n);
+            const count = top10Prods.filter(p => { const pBN = norm(p.br); return pBN.includes(topBN) || topBN.includes(pBN) || (topBN.includes('thien long') && pBN.includes('tl')) || (topBN.includes('tl') && pBN.includes('thien long')) }).length;
+            return { ...k, v: `${topB.n} (${parseFloat(topB.cur).toFixed(2)}%)`, sub: `${count}/10 Top SKU Spots` };
+          }
+        }
+        return k;
+      });
+      EL[targetId].innerHTML = dkpis.map((k, i) => { const neg = isNeg(k.g); const arrow = neg ? '↘' : '↗'; const cls = neg ? ' down' : ''; return `<div class="kpi-card ani d${i + 1}"><div class="kpi-top"><div class="kpi-icon ${k.ic}">${KI[k.ic]}</div>${k.g ? `<span class="kpi-growth${cls}">${arrow} ${k.g}</span>` : ''}</div><p class="kpi-label">${k.l}</p><p class="kpi-value">${k.v} ${k.u ? `<span class="unit">${k.u}</span>` : ''}</p>${k.sub ? `<p class="kpi-sub">${k.sub}</p>` : ''}</div>` }).join('');
+    }
+    function renderCharts(d) {
+      const mx = Math.max(...d.plat.map(p => Math.max(p.cur, p.pre)));
+      const pFmt = v => v >= 1 ? v.toFixed(1) + ' tỷ' : (v * 1000).toFixed(1) + ' tr';
+      const platHTML = d.plat.map(p => { const gc = p.cur > p.pre ? 'up' : 'down'; const gv = ((p.cur - p.pre) / p.pre * 100).toFixed(0); const arrow = gc === 'up' ? '↗' : '↘'; return `<div class="plat-item"><div class="plat-head"><span class="plat-name"><span class="dot" style="background:${p.c}"></span>${p.n}</span><span class="plat-change ${gc}">${arrow} ${gc === 'up' ? '+' : ''}${gv}%</span></div><div class="plat-bars"><div class="plat-bar-row prev"><span class="yr">Q1 2025</span><div class="track"><div class="fill" style="width:${p.pre / mx * 100}%;background:${p.c}"></div></div><span class="val">${pFmt(p.pre)}</span></div><div class="plat-bar-row"><span class="yr">Q1 2026</span><div class="track"><div class="fill" style="width:${p.cur / mx * 100}%;background:${p.c}"></div></div><span class="val">${pFmt(p.cur)}</span></div></div></div>` }).join('');
+      // Donut chart for brand share
+      const R = 52, CX = 60, CY = 60, SW = 12, C = 2 * Math.PI * R;
+      let offset = 0;
+      const segs = d.brand.map(b => { const len = b.cur / 100 * C; const gap = 1.5; const s = `<circle class="donut-seg" cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="${b.c}" stroke-width="${SW}" stroke-dasharray="${Math.max(len - gap, 0)} ${C - Math.max(len - gap, 0)}" stroke-dashoffset="${-offset}" stroke-linecap="round" style="transform-origin:${CX}px ${CY}px"/>`; offset += len; return s }).join('');
+      const topBrand = d.brand[0];
+      const topVal = Math.round(topBrand.cur * 10) / 10;
+      const centerStyle = `color:${topBrand.c}`;
+      const donutSVG = `<div class="donut-wrap"><div class="donut-box"><svg class="donut-svg" viewBox="0 0 120 120"><circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="var(--bd)" stroke-width="${SW}" opacity=".25"/>${segs}</svg><div class="donut-center"><div class="dv" style="${centerStyle}">${topVal}%</div><div class="dl" style="${centerStyle}">${topBrand.n}</div></div></div></div>`;
+      const legendHTML = d.brand.map(b => {
+        const cur = Math.round(b.cur * 10) / 10;
+        const diff = Math.round((b.cur - b.pre) * 10) / 10;
+        const cls = diff > 0 ? 'up' : diff < 0 ? 'down' : 'flat';
+        const val = diff == 0 ? 'Stable' : (diff > 0 ? `+${diff}` : diff) + 'pp YoY';
+        return `<div class="brand-legend-item"><div class="bl-left"><span class="bl-dot" style="background:${b.c}"></span><span class="bl-name">${b.n}</span></div><span class="bl-val ${cls}">${cur}% (${val})</span></div>`
+      }).join('');
+      EL.charts1.innerHTML = `<div class="card"><div class="card-hdr"><span class="ic">📈</span><h2 class="card-title">Growth Dynamics by Platform</h2></div>${platHTML}</div><div class="card"><div class="card-hdr"><span class="ic">🌐</span><h2 class="card-title">Brand Landscape Q1 2026</h2></div>${donutSVG}<div class="brand-legend">${legendHTML}</div></div>`;
+    }
+    function renderPrice(d) {
+      if (curCat === 'all') {
+        const cats = ['but_viet', 'hoc_cu', 'my_thuat', 'van_phong_pham'];
+        let mx = 0;
+        cats.forEach(k => {
+          if (!CAT[k]) return;
+          const gV = s => { let m = String(s).match(/[\d.]+/); return m ? parseFloat(m[0]) : 0; };
+          let c = gV(CAT[k].kpi[0].v), p = gV(CAT[k].kpi[0].sub);
+          if (c > mx) mx = c; if (p > mx) mx = p;
+        });
+        const catHTML = cats.map((k, i) => {
+          if (!CAT[k]) return '';
+          const cd = CAT[k];
+          const gV = s => { let m = String(s).match(/[\d.]+/); return m ? parseFloat(m[0]) : 0; };
+          const cur = gV(cd.kpi[0].v), pre = gV(cd.kpi[0].sub), gro = cd.kpi[0].g;
+          const gc = gro.includes('-') ? 'down' : 'up', arrow = gc === 'up' ? '↗' : '↘';
+          const colors = ['#3b82f6', '#10b981', '#eab308', '#8b5cf6'];
+          const c = colors[i % colors.length];
+          return `<div class="plat-item"><div class="plat-head"><span class="plat-name" style="font-size:15px;font-weight:600"><span class="pi">${cd.i}</span> ${cd.n}</span><span class="plat-change ${gc}" style="font-size:14px;font-weight:700">${arrow} ${gro}</span></div><div class="plat-bars"><div class="plat-bar-row prev"><span class="yr" style="width:60px">Q1 2025</span><div class="track"><div class="fill" style="width:${pre / mx * 100}%;background:${c};opacity:0.6"></div></div><span class="val">${pre.toFixed(1)} tỷ</span></div><div class="plat-bar-row"><span class="yr" style="width:60px">Q1 2026</span><div class="track"><div class="fill" style="width:${cur / mx * 100}%;background:${c}"></div></div><span class="val" style="font-weight:700">${cur.toFixed(1)} tỷ</span></div></div></div>`;
+        }).join('');
+        EL.priceSection1.innerHTML = `<div class="card"><div class="card-hdr" style="margin-bottom:16px;border-bottom:1px solid var(--bd);padding-bottom:12px"><span class="ic">📈</span><h2 class="card-title">Growth Dynamics by Category (Gross Sales)</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:24px;padding:8px 0">${catHTML}</div></div>`;
+        return;
+      }
+      const totals = d.price.map(p => p.s + p.l + p.t);
+      const mx = Math.max(...totals);
+      const fmt = v => v >= 1 ? (v).toFixed(1) + ' tỷ' : (v * 1000).toFixed(0) + ' tr';
+      const colors = ['#3b82f6', '#1a56db', '#8b5cf6', '#6366f1', '#0ea5e9', '#818cf8', '#60a5fa', '#38bdf8'];
+      const grand = totals.reduce((a, b) => a + b, 0);
+      const barsHTML = d.price.map((p, i) => {
+        const tot = totals[i];
+        const h = tot / mx * 100;
+        return `<div class="price-col"><div class="price-bar-wrap"><div class="price-stack" style="height:${h}%"><span class="pv">${fmt(tot)}</span><div class="seg" style="height:100%;background:${colors[i % 8]}"></div></div></div><span class="price-range">${p.r}</span></div>`
+      }).join('');
+      EL.priceSection1.innerHTML = `<div class="card"><div class="card-hdr"><span class="ic">💰</span><h2 class="card-title">Revenue by Price Segment</h2></div><div class="price-grid">${barsHTML}</div></div>`;
+    }
+    function renderProducts(d) {
+      let prods = d._sub ? d.prod : (curSub === 'all' ? d.prod : d.prod.filter(p => p.sc === curSub));
+      if (prods.length === 0) prods = d.prod;
+      const chN = { shopee: 'Shopee', tiktok: 'TikTok Shop', lazada: 'Lazada' };
+      const rows = prods.map((p, i) => {
+        const rc = i < 3 ? 'rk-' + (i + 1) : 'rk-d';
+        const gn = p.g ? (parseFloat(p.g) >= 0 ? 'up' : 'down') : '';
+        const ugn = p.ug ? (parseFloat(p.ug) >= 0 ? 'up' : 'down') : '';
+        const gTxt = p.g ? `<span class="td-g ${gn}">${gn === 'up' ? '↗' : '↘'} ${p.g}</span>` : '-';
+        const ugTxt = p.ug ? `<span class="td-g ${ugn}">${ugn === 'up' ? '↗' : '↘'} ${p.ug}</span>` : '-';
+        return `<tr><td class="rk"><span class="rk-badge ${rc}">${i + 1}</span></td><td class="td-prod"><div class="pn">${p.n}</div><div class="pb">${p.br}</div></td><td class="td-link">${p.url ? `<a href="${p.url}" target="_blank" class="prod-link" title="View product">🔗</a>` : '-'}</td><td>${p.pr || '-'}</td><td>${p.fm || '-'}</td><td><span class="ch-pill ch-${p.ch}">${chN[p.ch]}</span></td><td class="td-rev">${p.rv}</td><td>${gTxt}</td><td class="td-num">${p.us || '-'}</td><td>${ugTxt}</td><td class="td-num">${p.tr || '-'}</td><td class="td-num">${p.tu || '-'}</td><td class="td-num">${p.re || '-'}</td></tr>`
+      }).join('');
+      if (!EL.prodTbody) {
+        EL.prodGrid2.innerHTML = `<div class="tbl-wrap"><div class="tbl-hdr"><span class="tbl-title" id="prodTblTitle"></span></div><table class="tbl"><thead><tr><th class="rk">Rank</th><th>Product Details</th><th>Link</th><th>Price</th><th>Packed Size</th><th>Platform</th><th>Gross Sales</th><th>Growth</th><th>Units Sold</th><th>Growth</th><th>Total Gross Sales</th><th>Total Units</th><th>Reviews</th></tr></thead><tbody id="prodTbody"></tbody></table></div>`;
+        EL.prodTbody = document.getElementById('prodTbody');
+        EL.prodTblTitle = document.getElementById('prodTblTitle');
+      }
+      EL.prodTblTitle.innerText = `🏆 TOP ${prods.length} BEST-SELLING SKU RANKINGS`;
+      EL.prodTbody.innerHTML = rows;
+    }
+
+    /* ===== FILTER LOGIC ===== */
+    function setCat(cat) {
+      if (cat === curCat) return; curCat = cat; curSub = 'all'; refreshAll();
+    }
+    function setSub(sub) {
+      if (sub === curSub) return; curSub = sub; refreshAll();
+    }
+    function refreshAll() {
+      renderCatFilter(curSlide); renderSubFilter(curSlide);
+      const fadeIds = ['kpi1', 'charts1', 'priceSection1', 'kpi2', 'prodGrid2'];
+      fadeIds.forEach(id => { if (EL[id]) EL[id].classList.add('fading') });
+      clearTimeout(_rt); _rt = setTimeout(() => {
+        const d = getData();
+        renderExecKPIs(d); renderCharts(d); renderPrice(d);
+        renderKPIs('kpi2', d); renderProducts(d);
+        fadeIds.forEach(id => { if (EL[id]) EL[id].classList.remove('fading') });
+      }, 350);
+    }
+
+    /* ===== NAVIGATION ===== */
+    function goTo(n) {
+      if (n < 1 || n > 2 || n === curSlide) return;
+      EL['slide' + curSlide].classList.remove('active');
+      curSlide = n;
+      EL['slide' + curSlide].classList.add('active');
+      renderCatFilter(curSlide); renderSubFilter(curSlide);
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(curSlide + 1) }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(curSlide - 1) }
     });
-    const catHTML=cats.map((k,i)=>{
-      if(!CAT[k])return '';
-      const cd=CAT[k];
-      const gV=s=>{let m=String(s).match(/[\d.]+/);return m?parseFloat(m[0]):0;};
-      const cur=gV(cd.kpi[0].v),pre=gV(cd.kpi[0].sub),gro=cd.kpi[0].g;
-      const gc=gro.includes('-')?'down':'up',arrow=gc==='up'?'↗':'↘';
-      const colors=['#3b82f6','#10b981','#eab308','#8b5cf6'];
-      const c=colors[i%colors.length];
-      return `<div class="plat-item"><div class="plat-head"><span class="plat-name" style="font-size:15px;font-weight:600"><span class="pi">${cd.i}</span> ${cd.n}</span><span class="plat-change ${gc}" style="font-size:14px;font-weight:700">${arrow} ${gro}</span></div><div class="plat-bars"><div class="plat-bar-row prev"><span class="yr" style="width:60px">Q1 2025</span><div class="track"><div class="fill" style="width:${pre/mx*100}%;background:${c};opacity:0.6"></div></div><span class="val">${pre.toFixed(1)} tỷ</span></div><div class="plat-bar-row"><span class="yr" style="width:60px">Q1 2026</span><div class="track"><div class="fill" style="width:${cur/mx*100}%;background:${c}"></div></div><span class="val" style="font-weight:700">${cur.toFixed(1)} tỷ</span></div></div></div>`;
-    }).join('');
-    document.getElementById('priceSection1').innerHTML=`<div class="card"><div class="card-hdr" style="margin-bottom:16px;border-bottom:1px solid var(--bd);padding-bottom:12px"><span class="ic">📈</span><h2 class="card-title">Growth Dynamics by Category (Gross Sales)</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:24px;padding:8px 0">${catHTML}</div></div>`;
-    return;
-  }
-  const d=getData();
-  const totals=d.price.map(p=>p.s+p.l+p.t);
-  const mx=Math.max(...totals);
-  const fmt=v=>v>=1?(v).toFixed(1)+' tỷ':(v*1000).toFixed(0)+' tr';
-  const colors=['#3b82f6','#1a56db','#8b5cf6','#6366f1','#0ea5e9','#818cf8','#60a5fa','#38bdf8'];
-  const grand=totals.reduce((a,b)=>a+b,0);
-  const barsHTML=d.price.map((p,i)=>{
-  const tot=totals[i];
-  const h=tot/mx*100;
-  return`<div class="price-col"><div class="price-bar-wrap"><div class="price-stack" style="height:${h}%"><span class="pv">${fmt(tot)}</span><div class="seg" style="height:100%;background:${colors[i%8]}"></div></div></div><span class="price-range">${p.r}</span></div>`}).join('');
-  document.getElementById('priceSection1').innerHTML=`<div class="card"><div class="card-hdr"><span class="ic">💰</span><h2 class="card-title">Revenue by Price Segment</h2></div><div class="price-grid">${barsHTML}</div></div>`;
-}
-function renderProducts(){
-const d=getData();
-let prods=d._sub?d.prod:(curSub==='all'?d.prod:d.prod.filter(p=>p.sc===curSub));
-if(prods.length===0) prods=d.prod;
-const chN={shopee:'Shopee',tiktok:'TikTok Shop',lazada:'Lazada'};
-const rows=prods.map((p,i)=>{
-const rc=i<3?'rk-'+(i+1):'rk-d';
-const gn=p.g?(parseFloat(p.g)>=0?'up':'down'):'';
-const ugn=p.ug?(parseFloat(p.ug)>=0?'up':'down'):'';
-const gTxt=p.g?`<span class="td-g ${gn}">${gn==='up'?'↗':'↘'} ${p.g}</span>`:'-';
-const ugTxt=p.ug?`<span class="td-g ${ugn}">${ugn==='up'?'↗':'↘'} ${p.ug}</span>`:'-';
-return`<tr><td class="rk"><span class="rk-badge ${rc}">${i+1}</span></td><td class="td-prod"><div class="pn">${p.n}</div><div class="pb">${p.br}</div></td><td class="td-link">${p.url?`<a href="${p.url}" target="_blank" class="prod-link" title="View product">🔗</a>`:'-'}</td><td>${p.pr||'-'}</td><td>${p.fm||'-'}</td><td><span class="ch-pill ch-${p.ch}">${chN[p.ch]}</span></td><td class="td-rev">${p.rv}</td><td>${gTxt}</td><td class="td-num">${p.us||'-'}</td><td>${ugTxt}</td><td class="td-num">${p.tr||'-'}</td><td class="td-num">${p.tu||'-'}</td><td class="td-num">${p.re||'-'}</td></tr>`}).join('');
-const scName=curSub==='all'?d.n:d.sc.find(s=>s.k===curSub)?.n||d.n;
-document.getElementById('prodGrid2').innerHTML=`<div class="tbl-wrap"><div class="tbl-hdr"><span class="tbl-title">🏆 TOP ${prods.length} BEST-SELLING SKU RANKINGS</span></div><table class="tbl"><thead><tr><th class="rk">Rank</th><th>Product Details</th><th>Link</th><th>Price</th><th>Packed Size</th><th>Platform</th><th>Gross Sales</th><th>Growth</th><th>Units Sold</th><th>Growth</th><th>Total Gross Sales</th><th>Total Units</th><th>Reviews</th></tr></thead><tbody>${rows}</tbody></table></div>`;
-}
+    let tx = 0;
+    document.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX });
+    document.addEventListener('touchend', e => { const d = e.changedTouches[0].screenX - tx; if (d < -50) goTo(curSlide + 1); if (d > 50) goTo(curSlide - 1) });
 
-/* ===== FILTER LOGIC ===== */
-function setCat(cat){
-if(cat===curCat)return;curCat=cat;curSub='all';refreshAll();
-}
-function setSub(sub){
-if(sub===curSub)return;curSub=sub;refreshAll();
-}
-function refreshAll(){
-[1,2].forEach(s=>{renderCatFilter(s);renderSubFilter(s)});
-const fade=['kpi1','charts1','priceSection1','kpi2','prodGrid2'];
-fade.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('fading')});
-setTimeout(()=>{
-renderExecKPIs();renderCharts();renderPrice();
-renderKPIs('kpi2');renderProducts();
-fade.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('fading')});
-},350);
-}
-
-/* ===== NAVIGATION ===== */
-function goTo(n){
-if(n<1||n>2||n===curSlide)return;
-document.getElementById('slide'+curSlide).classList.remove('active');
-curSlide=n;
-document.getElementById('slide'+curSlide).classList.add('active');
-[1,2].forEach(s=>{renderCatFilter(s);renderSubFilter(s)});
-}
-document.addEventListener('keydown',e=>{
-if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(curSlide+1)}
-else if(e.key==='ArrowLeft'){e.preventDefault();goTo(curSlide-1)}
-});
-let tx=0;
-document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX});
-document.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-tx;if(d<-50)goTo(curSlide+1);if(d>50)goTo(curSlide-1)});
-
-/* ===== INIT ===== */
-window.addEventListener('load',()=>{
-if(typeof CAT === 'undefined') {
-    document.body.innerHTML = '<div style="padding: 50px; font-family: sans-serif; text-align: center; color: #ef4444;"><h2>Lỗi tải dữ liệu</h2><p>Không tìm thấy biến dữ liệu (CAT). Vui lòng đảm bảo file <strong>ecom_data_q1.js</strong> nằm cùng thư mục và không bị lỗi cú pháp.</p></div>';
-    return;
-}
-refreshAll();
-});
-</script>
+    /* ===== INIT ===== */
+    window.addEventListener('load', () => {
+      if (typeof CAT === 'undefined') {
+        document.body.innerHTML = '<div style="padding: 50px; font-family: sans-serif; text-align: center; color: #ef4444;"><h2>Lỗi tải dữ liệu</h2><p>Không tìm thấy biến dữ liệu (CAT). Vui lòng đảm bảo file <strong>ecom_data_q1.js</strong> nằm cùng thư mục và không bị lỗi cú pháp.</p></div>';
+        return;
+      }
+      ['kpi1', 'charts1', 'priceSection1', 'kpi2', 'prodGrid2', 'catF1', 'catF2', 'subF1', 'subF2', 'slide1', 'slide2'].forEach(id => { EL[id] = document.getElementById(id); });
+      refreshAll();
+    });
+  </script>
 </body>
+
 </html>
