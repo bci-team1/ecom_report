@@ -227,7 +227,21 @@ document.getElementById('kpi1').innerHTML=d.kpi.map((k,i)=>{const neg=isNeg(k.g)
 function renderKPIs(targetId){
 const d=getData();
 const isNeg=v=>v&&v.startsWith('-');
-document.getElementById(targetId).innerHTML=d.dkpi.map((k,i)=>{const neg=isNeg(k.g);const arrow=neg?'↘':'↗';const cls=neg?' down':'';return`<div class="kpi-card ani d${i+1}"><div class="kpi-top"><div class="kpi-icon ${k.ic}">${KI[k.ic]}</div>${k.g?`<span class="kpi-growth${cls}">${arrow} ${k.g}</span>`:''}</div><p class="kpi-label">${k.l}</p><p class="kpi-value">${k.v} ${k.u?`<span class="unit">${k.u}</span>`:''}</p>${k.sub?`<p class="kpi-sub">${k.sub}</p>`:''}</div>`}).join('');
+const dkpis=d.dkpi.map(k=>{
+if(k.l==='Leading Brand'){
+const topB=d.brand[0];
+if(topB){
+let prods=d._sub?d.prod:(curSub==='all'?d.prod:d.prod.filter(p=>p.sc===curSub));
+if(prods.length===0)prods=d.prod;
+const norm=s=>s?s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""):'';
+const topBN=norm(topB.n);
+const count=prods.filter(p=>{const pBN=norm(p.br);return pBN.includes(topBN)||topBN.includes(pBN)||(topBN.includes('thien long')&&pBN.includes('tl'))||(topBN.includes('tl')&&pBN.includes('thien long'))}).length;
+return {...k,v:`${topB.n} (${topB.cur}%)`,sub:`${count}/${prods.length} Top SKU Spots`};
+}
+}
+return k;
+});
+document.getElementById(targetId).innerHTML=dkpis.map((k,i)=>{const neg=isNeg(k.g);const arrow=neg?'↘':'↗';const cls=neg?' down':'';return`<div class="kpi-card ani d${i+1}"><div class="kpi-top"><div class="kpi-icon ${k.ic}">${KI[k.ic]}</div>${k.g?`<span class="kpi-growth${cls}">${arrow} ${k.g}</span>`:''}</div><p class="kpi-label">${k.l}</p><p class="kpi-value">${k.v} ${k.u?`<span class="unit">${k.u}</span>`:''}</p>${k.sub?`<p class="kpi-sub">${k.sub}</p>`:''}</div>`}).join('');
 }
 function renderCharts(){
 const d=getData(),mx=Math.max(...d.plat.map(p=>Math.max(p.cur,p.pre)));
