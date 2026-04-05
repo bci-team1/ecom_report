@@ -13,7 +13,7 @@ Một báo cáo tương tác hiệu suất cao (High-performance Interactive Da
 
 ## 📁 Cấu trúc thư mục
 
-Để dễ dàng bảo trì và cập nhật tự động cho các quý tiếp theo (Q2, Q3, Q4), dự án được chia làm 2 phần:
+Để dễ dàng bảo trì và cập nhật tự động cho các quý tiếp theo (Q2, Q3, Q4), dự án được chia làm các file:
 
 ```text
 ├── sector_performance_slide.html   # File giao diện chính (UI & Logic)
