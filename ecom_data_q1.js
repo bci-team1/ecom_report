@@ -2,7 +2,7 @@
 const CAT = {
   but_viet: {
     n: 'Bút Viết', i: '🖊️',
-    sc: [{ k: 'all', n: 'Tất cả', i: '📊' }, { k: 'but_bi', n: 'Bút Bi', i: '🖊️' }, { k: 'but_gel', n: 'Bút Gel', i: '✒️' }],
+    sc: [{ k: 'all', n: 'All', i: '📊' }, { k: 'but_bi', n: 'Bút Bi', i: '🖊️' }, { k: 'but_gel', n: 'Bút Gel', i: '✒️' }],
     kpi: [{ l: 'Gross Sales (VND)', v: '108.8', u: 'Tỷ', g: '+37%', sub: 'vs 79.5 tỷ in Q1 2025', ic: 'blue' }, { l: 'Units Sold', v: '3.4', u: 'Triệu', g: '-46%', sub: 'vs 6.3 triệu in Q1 2025', ic: 'green' }, { l: 'TikTok Market Share', v: '40.3%', u: '', g: '+11pp', sub: 'vs 29.5% in Q1 2025', ic: 'teal' }, { l: 'Active Storefronts', v: '5.8', u: 'Nghìn', g: '-9%', sub: 'vs 6.4 nghìn in Q1 2025', ic: 'orange' }],
     dkpi: [{ l: 'Gross Sales (VND)', v: '108.8', u: 'Tỷ', g: '+37%', ic: 'blue' }, { l: 'Top 10 Contribution', v: '~7.5%', u: '', g: '', sub: 'of Total Gross Sales', ic: 'green' }, { l: 'TikTok Market Share', v: '40.3%', u: '', g: '+11pp', sub: 'vs 29.5% in Q1 2025', ic: 'teal' }, { l: 'Leading Brand', v: 'TL (21%)', u: '', g: '', sub: '7/10 Top SKU Spots', ic: 'orange' }],
     plat: [{ n: 'Shopee', cur: 63.4, pre: 52.8, c: '#f97316' }, { n: 'TikTok Shop', cur: 43.8, pre: 23.4, c: '#0f172a' }, { n: 'Lazada', cur: 1.5, pre: 3.1, c: '#3b82f6' }, { n: 'Tiki', cur: 0.019, pre: 0.085, c: '#1a94ff' }],
@@ -63,7 +63,7 @@ const CAT = {
   },
   hoc_cu: {
     n: 'Học Cụ', i: '📐',
-    sc: [{ k: 'all', n: 'Tất cả', i: '📊' }, { k: 'may_tinh', n: 'Máy Tính KH', i: '🔢' }, { k: 'tap_vo', n: 'Tập Vở Sổ', i: '📓' }, { k: 'balo', n: 'Balo Học Sinh', i: '🎒' }, { k: 'but_chi', n: 'Bút Chì', i: '✏️' }, { k: 'gom', n: 'Gôm Tẩy', i: '🧽' }],
+    sc: [{ k: 'all', n: 'All', i: '📊' }, { k: 'may_tinh', n: 'Máy Tính KH', i: '🔢' }, { k: 'tap_vo', n: 'Tập Vở Sổ', i: '📓' }, { k: 'balo', n: 'Balo Học Sinh', i: '🎒' }, { k: 'but_chi', n: 'Bút Chì', i: '✏️' }, { k: 'gom', n: 'Gôm Tẩy', i: '🧽' }],
     kpi: [{ l: 'Gross Sales (VND)', v: '124.9', u: 'Tỷ', g: '+13%', sub: 'vs 110.1 tỷ in Q1 2025', ic: 'blue' }, { l: 'Units Sold', v: '2.4', u: 'Triệu', g: '-26%', sub: 'vs 3.2 triệu in Q1 2025', ic: 'green' }, { l: 'TikTok Market Share', v: '42.6%', u: '', g: '+8.5pp', sub: 'vs 34.1% in Q1 2025', ic: 'teal' }, { l: 'Active Storefronts', v: '9.3', u: 'Nghìn', g: '-5%', sub: 'vs 9.9 nghìn in Q1 2025', ic: 'orange' }],
     dkpi: [{ l: 'Gross Sales (VND)', v: '124.9', u: 'Tỷ', g: '+13%', ic: 'blue' }, { l: 'Top 10 Contribution', v: '~17%', u: '', g: '', sub: 'of Total Gross Sales', ic: 'green' }, { l: 'TikTok Market Share', v: '42.6%', u: '', g: '+8.5pp', sub: 'vs 34.1% in Q1 2025', ic: 'teal' }, { l: 'Leading Brand', v: 'Casio (20.8%)', u: '', g: '', sub: '2/10 Top SKU Spots', ic: 'orange' }],
     plat: [{ n: 'Shopee', cur: 70.4, pre: 69.0, c: '#f97316' }, { n: 'TikTok Shop', cur: 53.2, pre: 37.5, c: '#0f172a' }, { n: 'Lazada', cur: 1.2, pre: 3.4, c: '#3b82f6' }, { n: 'Tiki', cur: 0.0818, pre: 0.143, c: '#1a94ff' }],
@@ -181,7 +181,7 @@ const CAT = {
   },
   my_thuat: {
     n: 'Mỹ Thuật', i: '🎨',
-    sc: [{ k: 'all', n: 'Tất cả', i: '📊' }, { k: 'sap_mau', n: 'Sáp Màu', i: '🖍️' }, { k: 'acrylic', n: 'Acrylic Markers', i: '🖋️' }, { k: 'long_mt', n: 'Bút Lông Màu', i: '🖌️' }, { k: 'chi_mau', n: 'Bút Chì Màu', i: '✏️' }],
+    sc: [{ k: 'all', n: 'All', i: '📊' }, { k: 'sap_mau', n: 'Sáp Màu', i: '🖍️' }, { k: 'acrylic', n: 'Acrylic Markers', i: '🖋️' }, { k: 'long_mt', n: 'Bút Lông Màu', i: '🖌️' }, { k: 'chi_mau', n: 'Bút Chì Màu', i: '✏️' }],
     kpi: [{ l: 'Gross Sales (VND)', v: '70.4', u: 'Tỷ', g: '+24%', sub: 'vs 56.9 tỷ in Q1 2025', ic: 'blue' }, { l: 'Units Sold', v: '1.5', u: 'Triệu', g: '-14%', sub: 'vs 1.8 triệu in Q1 2025', ic: 'green' }, { l: 'TikTok Market Share', v: '37.4%', u: '', g: '+7.0pp', sub: 'vs 30.4% in Q1 2025', ic: 'teal' }, { l: 'Active Storefronts', v: '5.9', u: 'Nghìn', g: '-9%', sub: 'vs 6.5 nghìn in Q1 2025', ic: 'orange' }],
     dkpi: [{ l: 'Gross Sales (VND)', v: '70.4', u: 'Tỷ', g: '+24%', ic: 'blue' }, { l: 'Top 10 Contribution', v: '~12.6%', u: '', g: '', sub: 'of Total Gross Sales', ic: 'green' }, { l: 'TikTok Market Share', v: '37.4%', u: '', g: '+7.0pp', sub: 'vs 30.4% in Q1 2025', ic: 'teal' }, { l: 'Leading Brand', v: 'Deli (34.6%)', u: '', g: '', sub: '1/10 Top SKU Spots', ic: 'orange' }],
     plat: [{ n: 'Shopee', cur: 43.5, pre: 37.5, c: '#f97316' }, { n: 'TikTok Shop', cur: 26.3, pre: 17.3, c: '#0f172a' }, { n: 'Lazada', cur: 0.6394, pre: 2.13, c: '#3b82f6' }, { n: 'Tiki', cur: 0.0107, pre: 0.0713, c: '#1a94ff' }],
@@ -280,7 +280,7 @@ const CAT = {
   },
   van_phong_pham: {
     n: 'Văn Phòng Phẩm', i: '📎',
-    sc: [{ k: 'all', n: 'Tất cả', i: '📊' }, { k: 'da_quang', n: 'Bút Dạ Quang', i: '🔆' }, { k: 'long_bang', n: 'Bút Lông Bảng', i: '📝' }, { k: 'long_dau', n: 'Bút Lông Dầu', i: '🖍️' }, { k: 'xoa_nuoc', n: 'Bút Xóa Nước', i: '🖋️' }, { k: 'file_folder', n: 'File & Folder', i: '📂' }, { k: 'giay_copy', n: 'Giấy Photocopy', i: '📄' }],
+    sc: [{ k: 'all', n: 'All', i: '📊' }, { k: 'da_quang', n: 'Bút Dạ Quang', i: '🔆' }, { k: 'long_bang', n: 'Bút Lông Bảng', i: '📝' }, { k: 'long_dau', n: 'Bút Lông Dầu', i: '🖍️' }, { k: 'xoa_nuoc', n: 'Bút Xóa Nước', i: '🖋️' }, { k: 'file_folder', n: 'File & Folder', i: '📂' }, { k: 'giay_copy', n: 'Giấy Photocopy', i: '📄' }],
     kpi: [{ l: 'Gross Sales (VND)', v: '135.9', u: 'Tỷ', g: '+49%', sub: 'vs 91.2 tỷ in Q1 2025', ic: 'blue' }, { l: 'Units Sold', v: '3.3', u: 'Triệu', g: '-11%', sub: 'vs 3.7 triệu in Q1 2025', ic: 'green' }, { l: 'TikTok Market Share', v: '27.8%', u: '', g: '+7.3pp', sub: 'vs 20.5% in Q1 2025', ic: 'teal' }, { l: 'Active Storefronts', v: '11.7', u: 'Nghìn', g: '-5%', sub: 'vs 12.3 nghìn in Q1 2025', ic: 'orange' }],
     dkpi: [{ l: 'Gross Sales (VND)', v: '135.9', u: 'Tỷ', g: '+49%', ic: 'blue' }, { l: 'Top 10 Contribution', v: '~11.5%', u: '', g: '', sub: 'of Total Gross Sales', ic: 'green' }, { l: 'TikTok Market Share', v: '27.8%', u: '', g: '+7.3pp', sub: 'vs 20.5% in Q1 2025', ic: 'teal' }, { l: 'Leading Brand', v: 'Ik Copy (11.8%)', u: '', g: '', sub: '5/10 Top SKU Spots', ic: 'orange' }],
     plat: [{ n: 'Shopee', cur: 96.6, pre: 68.5, c: '#f97316' }, { n: 'TikTok Shop', cur: 37.8, pre: 18.7, c: '#0f172a' }, { n: 'Lazada', cur: 1.5, pre: 3.95, c: '#3b82f6' }, { n: 'Tiki', cur: 0.0682, pre: 0.158, c: '#1a94ff' }],
@@ -574,7 +574,7 @@ const CAT = {
   
   const allObj = {
     n: 'All Cate', i: '🌐',
-    sc: [{ k: 'all', n: 'Tất cả', i: '📊' }],
+    sc: [{ k: 'all', n: 'All', i: '📊' }],
     kpi: kpis,
     dkpi: [
       kpis[0],
